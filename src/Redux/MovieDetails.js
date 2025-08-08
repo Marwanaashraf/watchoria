@@ -27,11 +27,10 @@ async function getMovieData(movieId) {
     ]);
     return {
       movies: movieReq.data,
-      cast: castReq.data.cast.slice(0, 12),
-      recomindations: recomendationReq.data.results.slice(0, 4),
+      cast: castReq.data.cast.filter((ele) => ele.profile_path != null),
+      recomindations: recomendationReq.data.results.filter((ele) => ele.vote_average != 0).slice(0, 4),
     };
   } catch (err) {
-  
     console.log(err);
   }
 }
@@ -56,4 +55,3 @@ export let MovieSlice = createSlice({
   },
 });
 export let movieDetailsReducer = MovieSlice.reducer;
-

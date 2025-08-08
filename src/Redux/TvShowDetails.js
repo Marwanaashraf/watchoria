@@ -28,8 +28,8 @@ async function getTvShowData(tvShowId) {
 
     return {
       tvShow: tvShowReq.data,
-      cast: castReq.data.cast,
-      recomindations: recomindReq.data.results.slice(0, 4),
+      cast: castReq.data.cast.filter((ele) => ele.profile_path != null),
+      recomindations: recomindReq.data.results.filter((ele) => ele.vote_average != 0).slice(0, 4),
     };
   } catch (error) {
     console.log(error);

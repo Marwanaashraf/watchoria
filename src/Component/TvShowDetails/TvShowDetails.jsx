@@ -17,7 +17,7 @@ export default function TvShowDetails() {
   }
   //slider
   let settings = {
-    slidesToShow: 6,
+    slidesToShow: 5,
     slidesToScroll: 1,
     infinite: false,
     responsive: [
@@ -81,11 +81,14 @@ export default function TvShowDetails() {
                   px-3 py-.5 rounded-xl text-white flex space-x-1 items-center`
                 }
               >
-                 {tvShow.vote_average==0 ? "": <>
-                  <i className="fa-solid fa-star"></i>
-                  <p>{tvShow.vote_average?.toFixed(1)}</p>
-                  
-                  </>}
+                {tvShow.vote_average == 0 ? (
+                  ""
+                ) : (
+                  <>
+                    <i className="fa-solid fa-star"></i>
+                    <p>{tvShow.vote_average?.toFixed(1)}</p>
+                  </>
+                )}
               </div>
             </div>
             <div className="xl:col-span-3  lg:col-span-4 md:col-span-3 space-y-3 mt-2">
@@ -140,81 +143,94 @@ export default function TvShowDetails() {
               </Link>
             </div>
           </div>
-          <div className="my-9">
-            <h1 className="text-4xl text-main font-serif">All Cast</h1>
-            <div className="w-[95%] mx-auto my-3">
-              <Slider className=" p-3" {...settings}>
-                {cast?.filter((ele) => ele.profile_path).map((ele) => {
+          {cast.length == 0 ? (
+            ""
+          ) : (
+            <div className="my-9">
+              <h1 className="text-4xl text-main font-serif">All Cast</h1>
+              <div className="w-[95%] mx-auto my-3">
+                <Slider className=" p-3" {...settings}>
+                  {cast
+                    ?.filter((ele) => ele.profile_path)
+                    .map((ele) => {
+                      return (
+                        <div className="rounded-lg shadow-lg pl-2 h-full">
+                          <img
+                            className="w-full rounded-t-lg"
+                            src={
+                              "https://image.tmdb.org/t/p/w500/" +
+                              ele?.profile_path
+                            }
+                            alt={ele.name}
+                          />
+                          <div className="rounded-b-lg shadow-lg text-center p-2 bg-slate-100 dark:bg-slate-800">
+                            <h3 className="font-bold">
+                              {ele.name?.split(" ").slice(0, 2).join(" ")}
+                            </h3>
+                            <h3 className="text-slate-500 dark:text-slate-400">
+                              {ele.character?.split(" ").slice(0, 2).join(" ")}
+                            </h3>
+                          </div>
+                        </div>
+                      );
+                    })}
+                </Slider>
+              </div>
+            </div>
+          )}
+
+          {recomindations.length == 0 ? (
+            ""
+          ) : (
+            <div className="my-8">
+              <h1 className="text-4xl text-main font-serif">Recommendations</h1>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-4 w-[95%] mx-auto">
+                {recomindations?.map((ele) => {
                   return (
-                    <div className="rounded-lg shadow-lg pl-2 h-full">
+                    <Link
+                      onClick={() => {
+                        getRecommend(ele.id);
+                      }}
+                      to={`/tv-shows/${type}/${ele.id}`}
+                      key={ele.id}
+                      className="relative shadow-xl bg-slate-50 dark:bg-slate-800 text-center cursor-pointer rounded-lg overflow-hidden"
+                    >
                       <img
-                        className="w-full rounded-t-lg"
+                        className="w-full rounded-t-lg hover:scale-[1.03] transition-all duration-[1s]"
                         src={
-                          "https://image.tmdb.org/t/p/w500/" + ele?.profile_path
+                          "https://image.tmdb.org/t/p/w500/" + ele.poster_path
                         }
                         alt={ele.name}
+                        loading="lazy"
                       />
-                      <div className="rounded-b-lg shadow-lg text-center p-2 bg-slate-100 dark:bg-slate-800">
+                      <div className=" p-3">
                         <h3 className="font-bold">
-                          {ele.name?.split(" ").slice(0, 2).join(" ")}
-                        </h3>
-                        <h3 className="text-slate-500 dark:text-slate-400">
-                          {ele.character?.split(" ").slice(0, 2).join(" ")}
+                          {ele.name} ({ele.first_air_date?.split("-")[0]})
                         </h3>
                       </div>
-                    </div>
+                      <div
+                        className={
+                          ele.vote_average >= 7
+                            ? `absolute top-2 right-2 bg-green-500 
+                                px-3 py-.5 rounded-xl text-white`
+                            : ele.vote_average >= 5
+                            ? `absolute top-2 right-2 bg-yellow-500 
+                                px-3 py-.5 rounded-xl text-white`
+                            : `absolute top-2 right-2 bg-red-500 
+                                px-3 py-.5 rounded-xl text-white`
+                        }
+                      >
+                        <p>
+                          <i className="fa-solid fa-star"></i>
+                          {ele.vote_average?.toFixed(1)}
+                        </p>
+                      </div>
+                    </Link>
                   );
                 })}
-              </Slider>
+              </div>
             </div>
-          </div>
-          {recomindations.length ==0? "" : <div className="my-8">
-            <h1 className="text-4xl text-main font-serif">Recommendations</h1>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-4 w-[95%] mx-auto">
-              {recomindations?.map((ele) => {
-                return (
-                  <Link
-                    onClick={() => {
-                      getRecommend(ele.id);
-                    }}
-                    to={`/tv-shows/${type}/${ele.id}`}
-                    key={ele.id}
-                    className="relative shadow-xl bg-slate-50 dark:bg-slate-800 text-center cursor-pointer rounded-lg overflow-hidden"
-                  >
-                    <img
-                      className="w-full rounded-t-lg hover:scale-[1.03] transition-all duration-[1s]"
-                      src={"https://image.tmdb.org/t/p/w500/" + ele.poster_path}
-                      alt={ele.name}
-                      loading="lazy"
-                    />
-                    <div className=" p-3">
-                      <h3 className="font-bold">
-                        {ele.name} ({ele.first_air_date?.split("-")[0]})
-                      </h3>
-                    </div>
-                    <div
-                      className={
-                        ele.vote_average >= 7
-                          ? `absolute top-2 right-2 bg-green-500 
-                                px-3 py-.5 rounded-xl text-white`
-                          : ele.vote_average >= 5
-                          ? `absolute top-2 right-2 bg-yellow-500 
-                                px-3 py-.5 rounded-xl text-white`
-                          : `absolute top-2 right-2 bg-red-500 
-                                px-3 py-.5 rounded-xl text-white`
-                      }
-                    >
-                      <p>
-                        <i className="fa-solid fa-star"></i>
-                        {ele.vote_average?.toFixed(1)}
-                      </p>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          </div> }
-          
+          )}
         </div>
       )}
     </>

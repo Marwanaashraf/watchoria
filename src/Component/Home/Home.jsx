@@ -59,8 +59,7 @@ export default function Home() {
     slidesToShow: 5,
     slidesToScroll: 3,
     infinite: false,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
+    
     responsive: [
       {
         breakpoint: 1024,
@@ -141,7 +140,7 @@ export default function Home() {
                 </div>
               ))}
           </Slider>
-          <div className="contain py-8">
+          <div className="contain py-10">
             <div className="flex justify-between">
               <h3 className="font-bold text-2xl">New Releases</h3>
               <p
@@ -151,7 +150,7 @@ export default function Home() {
                 See All
               </p>
             </div>
-            <Slider className="p-3 py-3" {...settings}>
+            <Slider className="p-3 py-6" {...settings}>
               {seriesList.map((ele) => {
                 return (
                   <div
@@ -171,9 +170,9 @@ export default function Home() {
               })}
             </Slider>
           </div>
-          <div className="contain py-8">
+          <div className="contain py-10">
             <h3 className="font-bold text-2xl">Trending Movies</h3>
-            <Slider className="p-3 py-3" {...settings}>
+            <Slider className="p-3 py-5" {...settings}>
               {trendingMovies.map((ele, i) => {
                 return (
                   <div>
@@ -208,9 +207,9 @@ export default function Home() {
               })}
             </Slider>
           </div>
-          <div className="contain py-8">
+          <div className="contain py-10">
             <h3 className="font-bold text-2xl">Trending TvShows</h3>
-            <Slider className="p-3 py-3" {...settings}>
+            <Slider className="p-3 py-5" {...settings}>
               {trendingTv.map((ele, i) => {
                 return (
                   <div>

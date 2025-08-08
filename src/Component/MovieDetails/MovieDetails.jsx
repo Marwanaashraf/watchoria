@@ -23,11 +23,10 @@ export default function MovieDetails() {
   }
   //slider
   let settings = {
-    slidesToShow: 6,
-    slidesToScroll: 2,
-    infinite: true,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    infinite: false,
+    
     responsive: [
       {
         breakpoint: 1024,
@@ -56,6 +55,8 @@ export default function MovieDetails() {
   useEffect(() => {
     disp(getMovie(id));
   }, []);
+  console.log(cast);
+  
   return (
     <>
       <Helmet>
@@ -75,7 +76,7 @@ export default function MovieDetails() {
                 <img
                   className="w-full rounded-lg shadow-lg"
                   src={"https://image.tmdb.org/t/p/w500/" + movie.poster_path}
-                  alt=""
+                  alt={movie.title}
                 />
                 <div
                   className={
@@ -107,11 +108,14 @@ export default function MovieDetails() {
                   <p className="">
                     {movie.release_date?.split("-").reverse().join("-")}
                   </p>
-                  <p className="">
+                  {movie.runtime? <p className="">
                     <i className="fa-solid fa-clock  text-sm"></i>{" "}
-                    <span>{(movie.runtime / 60).toFixed(0)}h</span>{" "}
-                    <span>{movie.runtime % 60}min</span>
-                  </p>
+                    {(movie.runtime / 60).toFixed(0)!=0? <span>{(movie.runtime / 60).toFixed(0)}h</span> : ""}
+                    {" "}
+                    {movie.runtime % 60 !=0? <span>{movie.runtime % 60}min</span> : ""}
+                    
+                  </p>:"" }
+                  
                 </div>
                 <h3 className="text-3xl font-semibold font-serif ">Overview</h3>
                 <p className="text-slate-600 dark:text-slate-500">
@@ -138,7 +142,7 @@ export default function MovieDetails() {
                 </button>
               </div>
             </div>
-            <div className="py-16">
+            {cast.length ==0 ? "" : <div className="py-16">
               <h1 className="text-4xl text-main font-serif">All Cast</h1>
               <div className="w-[95%] mx-auto my-3">
                 <Slider className=" p-3" {...settings}>
@@ -168,7 +172,8 @@ export default function MovieDetails() {
                     })}
                 </Slider>
               </div>
-            </div>
+            </div>}
+            
           {recomindations.length ==0? "" : <div className="py-16">
               <h1 className="text-4xl text-main font-bold font-serif">
                 Recommendations
