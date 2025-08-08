@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/watchoria/static/css/main.fa8d1add.css",
-    "main.js": "/watchoria/static/js/main.60d107f1.js",
+    "main.css": "/watchoria/static/css/main.b86db403.css",
+    "main.js": "/watchoria/static/js/main.2b3755ca.js",
     "static/js/453.f0e78aab.chunk.js": "/watchoria/static/js/453.f0e78aab.chunk.js",
     "static/media/fa-solid-900.woff2": "/watchoria/static/media/fa-solid-900.f54756da1f3d1b88887f.woff2",
     "static/media/fa-brands-400.woff2": "/watchoria/static/media/fa-brands-400.1f6bad931d92a0a52c45.woff2",
@@ -14,12 +14,12 @@
     "static/media/slick.woff": "/watchoria/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/watchoria/index.html",
     "static/media/glyphicons-basic-38-picture-grey-svg": "/watchoria/static/media/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.f9db13c5f6963815666d104105243935.svg",
-    "main.fa8d1add.css.map": "/watchoria/static/css/main.fa8d1add.css.map",
-    "main.60d107f1.js.map": "/watchoria/static/js/main.60d107f1.js.map",
+    "main.b86db403.css.map": "/watchoria/static/css/main.b86db403.css.map",
+    "main.2b3755ca.js.map": "/watchoria/static/js/main.2b3755ca.js.map",
     "453.f0e78aab.chunk.js.map": "/watchoria/static/js/453.f0e78aab.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.fa8d1add.css",
-    "static/js/main.60d107f1.js"
+    "static/css/main.b86db403.css",
+    "static/js/main.2b3755ca.js"
   ]
 }
