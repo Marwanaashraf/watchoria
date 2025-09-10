@@ -57,7 +57,7 @@ export default function Trending({ trending, type }) {
                         : ele.name?.split(" ").slice(0, 3).join(" ")}
                     </h1>
                     <p className="text-slate-600 dark:text-slate-500">
-                      {ele.release_date?.split("-")[0]}
+                      {type === "movie"?ele.release_date?.split("-")[0] : ele.first_air_date?.split("-")[0]}
                     </p>
                   </div>
                 </div>

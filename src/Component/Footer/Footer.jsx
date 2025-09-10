@@ -42,7 +42,7 @@ export default function Footer() {
     disp(getTvShows({ type, page: 1 }));
   }
   return (
-    <footer className="bg-slate-100 dark:bg-slate-950 p-3 py-5">
+    <footer className="bg-slate-200 dark:bg-slate-950 p-3 py-5">
       <div className="contain grid grid-cols-1 md:grid-cols-3  gap-5">
         <div className="space-y-2">
           <div className="flex space-x-1 items-center cursor-pointer">

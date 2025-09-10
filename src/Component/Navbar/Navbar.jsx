@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
 import $ from "jquery";
-import film from "../../assets/images/mIg1qCkVxnAlM2TK3RUF0tdEXlE.webp";
 import logo from "../../assets/images/Watchix.png";
 import { useDispatch, useSelector } from "react-redux";
 import { changeMoviePage, getAllMovies } from "../../Redux/MovieSlice.js";
@@ -10,16 +9,27 @@ import { getAllData } from "../../Redux/SearchSlice.js";
 import { getMovie } from "../../Redux/MovieDetails.js";
 import { getTvShow } from "../../Redux/TvShowDetails.js";
 import SearchAll from "../../Pages/SearchAll/SearchAll.jsx";
-
+import NavSlider from "../NavSlider/NavSlider.jsx";
+export let movieLinks = [
+  { apiName: "top_rated", htmlName: "Top Rated" },
+  { apiName: "now_playing", htmlName: "Now Playing" },
+  { apiName: "popular", htmlName: "Popular" },
+  { apiName: "upcoming", htmlName: "Upcoming" },
+];
+export let showsLinks = [
+  { apiName: "top_rated", htmlName: "Top Rated" },
+  { apiName: "popular", htmlName: "Popular" },
+  { apiName: "airing_today", htmlName: "Airing Today" },
+];
 export default function Navbar() {
   let disp = useDispatch();
   let navigate = useNavigate();
   let [darkMode, setDarkMode] = useState(false);
   let [slider, setSlider] = useState(false);
-  let [movieDropDown, setMovieDroupDown] = useState(false);
-  let [tvDropDown, setTvDroupDown] = useState(false);
   let { searchData, loading, err } = useSelector((d) => d.searchStore);
   let [notFound, setNotFound] = useState(null);
+  let [movieDropDown, setMovieDroupDown] = useState(false);
+  let [tvDropDown, setTvDroupDown] = useState(false);
 
   function changeMode() {
     if (darkMode) {
@@ -41,21 +51,7 @@ export default function Navbar() {
   function openSlider() {
     setSlider(true);
   }
-  //dropd down
-  function moviesDropDown() {
-    if (movieDropDown) {
-      setMovieDroupDown(false);
-    } else {
-      setMovieDroupDown(true);
-    }
-  }
-  function showsDropDown() {
-    if (tvDropDown) {
-      setTvDroupDown(false);
-    } else {
-      setTvDroupDown(true);
-    }
-  }
+
   //search
   let [val, setValue] = useState("");
   async function searchAll(e) {
@@ -133,7 +129,7 @@ export default function Navbar() {
   }, []);
   return (
     <>
-      <nav className="bg-slate-100 dark:bg-slate-950 p-4 text-black dark:text-white fixed top-0 left-0 right-0 z-30 shadow-lg">
+      <nav className="bg-slate-200 dark:bg-slate-950 p-4 text-black dark:text-white fixed top-0 left-0 right-0 z-30 shadow-lg">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           <div className="flex space-x-6 items-center">
             {/* logo */}
@@ -163,61 +159,27 @@ export default function Navbar() {
                 </p>
                 <div className="hidden group-hover/movies:block ">
                   <div className="absolute top-7 left-0 bg-slate-50 dark:bg-slate-800 shadow-lg rounded-lg flex-col p-2 space-y-3 w-32 ">
-                    <NavLink
-                      onClick={() => {
-                        getMoviesType("top_rated");
-                      }}
-                      to="/movies/top_rated"
-                      className={({ isActive }) =>
-                        isActive
-                          ? "text-main hover:text-red-600 "
-                          : "hover:text-red-600"
-                      }
-                    >
-                      Top rated
-                    </NavLink>
-                    <hr />
-                    <NavLink
-                      onClick={() => {
-                        getMoviesType("upcoming");
-                      }}
-                      to="/movies/upcoming"
-                      className={({ isActive }) =>
-                        isActive
-                          ? "text-main hover:text-red-600 "
-                          : "hover:text-red-600"
-                      }
-                    >
-                      upcoming
-                    </NavLink>
-                    <hr />
-                    <NavLink
-                      onClick={() => {
-                        getMoviesType("now_playing");
-                      }}
-                      to="/movies/now_playing"
-                      className={({ isActive }) =>
-                        isActive
-                          ? "text-main hover:text-red-600 "
-                          : "hover:text-red-600"
-                      }
-                    >
-                      Now playing
-                    </NavLink>
-                    <hr />
-                    <NavLink
-                      onClick={() => {
-                        getMoviesType("popular");
-                      }}
-                      to="/movies/popular"
-                      className={({ isActive }) =>
-                        isActive
-                          ? "text-main hover:text-red-600 "
-                          : "hover:text-red-600"
-                      }
-                    >
-                      Popular
-                    </NavLink>
+                    {movieLinks.map((ele) => {
+                      return (
+                        <>
+                          <NavLink
+                            key={ele.apiName}
+                            onClick={() => {
+                              getMoviesType(ele.apiName);
+                            }}
+                            to={`/movies/${ele.apiName}`}
+                            className={({ isActive }) =>
+                              isActive
+                                ? "text-main hover:text-red-600 "
+                                : "hover:text-red-600"
+                            }
+                          >
+                            {ele.htmlName}
+                          </NavLink>
+                          {ele.apiName === "upcoming" ? "" : <hr />}
+                        </>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -227,47 +189,27 @@ export default function Navbar() {
                 </p>
                 <div className="hidden group-hover/tv:block">
                   <div className="absolute top-7 left-0 bg-slate-50 dark:bg-slate-800 shadow-lg rounded-lg flex-col p-2 space-y-3 w-32">
-                    <NavLink
-                      onClick={() => {
-                        getSeriesType("top_rated");
-                      }}
-                      to="/tv-shows/top_rated"
-                      className={({ isActive }) =>
-                        isActive
-                          ? "text-main hover:text-red-600 "
-                          : "hover:text-red-600"
-                      }
-                    >
-                      Top rated
-                    </NavLink>
-                    <hr />
-                    <NavLink
-                      onClick={() => {
-                        getSeriesType("airing_today");
-                      }}
-                      to="/tv-shows/airing_today"
-                      className={({ isActive }) =>
-                        isActive
-                          ? "text-main hover:text-red-600 "
-                          : "hover:text-red-600"
-                      }
-                    >
-                      Airing Today
-                    </NavLink>
-                    <hr />
-                    <NavLink
-                      onClick={() => {
-                        getSeriesType("popular");
-                      }}
-                      to="/tv-shows/popular"
-                      className={({ isActive }) =>
-                        isActive
-                          ? "text-main hover:text-red-600 "
-                          : "hover:text-red-600"
-                      }
-                    >
-                      Popular
-                    </NavLink>
+                    {showsLinks.map((ele) => {
+                      return (
+                        <>
+                          <NavLink
+                            key={ele.apiName}
+                            onClick={() => {
+                              getSeriesType(ele.apiName);
+                            }}
+                            to={`/tv-shows/${ele.apiName}`}
+                            className={({ isActive }) =>
+                              isActive
+                                ? "text-main hover:text-red-600 "
+                                : "hover:text-red-600"
+                            }
+                          >
+                            {ele.htmlName}
+                          </NavLink>
+                          {ele.apiName === "airing_today" ? "" : <hr />}
+                        </>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -385,175 +327,17 @@ export default function Navbar() {
         </div>
       </nav>
       {slider ? (
-        <section
-          className="slider fixed top-0 bottom-0 right-0 left-0 bg-slate-200 z-40 
-       block lg:hidden  dark:bg-slate-700"
-        >
-          <div className="flex flex-col space-y-5 text-2xl my-5  p-4">
-            <div className="mt-10 ">
-              <NavLink
-                onClick={closeSlider}
-                to="/"
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-main hover:text-red-600 "
-                    : "hover:text-red-600"
-                }
-              >
-                Home
-              </NavLink>
-            </div>
-            <div className="">
-              <p
-                onClick={moviesDropDown}
-                className="hover:text-red-600 cursor-pointer"
-              >
-                Movies<i className="fa-solid fa-angle-down text-sm"></i>
-              </p>
-              {movieDropDown ? (
-                <div className=" ">
-                  <div className=" top-7 left-0 bg-slate-50 dark:bg-slate-800 shadow-lg rounded-lg flex-col p-2 space-y-3  ">
-                    <NavLink
-                      onClick={() => {
-                        getMoviesType("top_rated");
-                      }}
-                      to="/movies/top_rated"
-                      className={({ isActive }) =>
-                        isActive
-                          ? "text-main hover:text-red-600 "
-                          : "hover:text-red-600"
-                      }
-                    >
-                      Top rated
-                    </NavLink>
-                    <hr />
-                    <NavLink
-                      onClick={() => {
-                        getMoviesType("upcoming");
-                      }}
-                      to="/movies/upcoming"
-                      className={({ isActive }) =>
-                        isActive
-                          ? "text-main hover:text-red-600 "
-                          : "hover:text-red-600"
-                      }
-                    >
-                      upcoming
-                    </NavLink>
-                    <hr />
-                    <NavLink
-                      onClick={() => {
-                        getMoviesType("now_playing");
-                      }}
-                      to="/movies/now_playing"
-                      className={({ isActive }) =>
-                        isActive
-                          ? "text-main hover:text-red-600 "
-                          : "hover:text-red-600"
-                      }
-                    >
-                      Now playing
-                    </NavLink>
-                    <hr />
-                    <NavLink
-                      onClick={() => {
-                        getMoviesType("popular");
-                      }}
-                      to="/movies/popular"
-                      className={({ isActive }) =>
-                        isActive
-                          ? "text-main hover:text-red-600 "
-                          : "hover:text-red-600"
-                      }
-                    >
-                      Popular
-                    </NavLink>
-                  </div>
-                </div>
-              ) : (
-                ""
-              )}
-            </div>
-            <div className="">
-              <p
-                onClick={showsDropDown}
-                className="hover:text-red-600 cursor-pointer"
-              >
-                TvShows<i className="fa-solid fa-angle-down text-sm"></i>{" "}
-              </p>
-              {tvDropDown ? (
-                <div className="">
-                  <div className="bg-slate-50 dark:bg-slate-800 shadow-lg rounded-lg flex-col p-2 space-y-3">
-                    <NavLink
-                      onClick={() => {
-                        getSeriesType("top_rated");
-                      }}
-                      to="/tv-shows/top_rated"
-                      className={({ isActive }) =>
-                        isActive
-                          ? "text-main hover:text-red-600 "
-                          : "hover:text-red-600"
-                      }
-                    >
-                      Top rated
-                    </NavLink>
-                    <hr />
-                    <NavLink
-                      onClick={() => {
-                        getSeriesType("airing_today");
-                      }}
-                      to="/tv-shows/airing_today"
-                      className={({ isActive }) =>
-                        isActive
-                          ? "text-main hover:text-red-600 "
-                          : "hover:text-red-600"
-                      }
-                    >
-                      Airing Today
-                    </NavLink>
-                    <hr />
-                    <NavLink
-                      onClick={() => {
-                        getSeriesType("popular");
-                      }}
-                      to="/tv-shows/popular"
-                      className={({ isActive }) =>
-                        isActive
-                          ? "text-main hover:text-red-600 "
-                          : "hover:text-red-600"
-                      }
-                    >
-                      Popular
-                    </NavLink>
-                  </div>
-                </div>
-              ) : (
-                ""
-              )}
-            </div>
-
-            <div
-              onClick={changeMode}
-              className="flex items-center space-x-1 rounded-lg shadow-md  bg-slate-300 dark:bg-slate-800 cursor-pointer px-2 w-56 py-3 hover:bg-slate-400 hover:dark:bg-slate-900 transition-all duration-1000"
-            >
-              {darkMode ? (
-                <i className="fa-solid fa-lightbulb text-yellow-400"></i>
-              ) : (
-                <i className="fa-solid fa-moon "></i>
-              )}
-              <p className="text-lg">Toggle Mode</p>
-            </div>
-          </div>
-          <div
-            onClick={closeSlider}
-            className="close-slider absolute top-2 right-3 cursor-pointer "
-          >
-            <i className="fa-solid fa-x text-xl text-gray-400 hover:text-red-600"></i>
-          </div>
-          <div className="absolute top-2 left-3">
-            <img className="w-10" src={logo} alt="" />
-          </div>
-        </section>
+        <NavSlider
+          closeSlider={closeSlider}
+          getMoviesType={getMoviesType}
+          getSeriesType={getSeriesType}
+          changeMode={changeMode}
+          darkMode={darkMode}
+          movieDropDown={movieDropDown}
+          setMovieDroupDown={setMovieDroupDown}
+          tvDropDown={tvDropDown}
+          setTvDroupDown={setTvDroupDown}
+        />
       ) : (
         ""
       )}

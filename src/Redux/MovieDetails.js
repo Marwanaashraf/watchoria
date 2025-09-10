@@ -31,7 +31,7 @@ async function getMovieData(movieId) {
       movies: movieReq.data,
       cast: castReq.data.cast.filter((ele) => ele.profile_path != null),
       recomindations: recomendationReq.data.results
-        .filter((ele) => ele.vote_average != 0)
+        .filter((ele) => ele.vote_average != 0 && ele.poster_path)
         .slice(0, 10),
     };
   } catch (err) {

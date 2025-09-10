@@ -111,7 +111,7 @@ export default function Home() {
                           <h1 className="text-5xl uppercase text-main font-bold text-shadow">
                             {movie.title}
                           </h1>
-                          <p className="text-lg">
+                          <p className="text-lg text-white">
                             <span>
                               <i className="fa-solid fa-star text-yellow-500"></i>{" "}
                               {movie.vote_average?.toFixed(1)}
@@ -127,7 +127,7 @@ export default function Home() {
                             onClick={() => {
                               navigateDetails(movie.id, "movie");
                             }}
-                            className="bg-red-600 rounded-lg px-5 py-2.5 hover:bg-red-700"
+                            className="bg-main text-white rounded-lg px-5 py-2.5 hover:bg-red-700"
                           >
                             Show Details
                           </button>

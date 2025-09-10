@@ -105,7 +105,24 @@ export default function TvShowDetails() {
                     : tvShow.created_by[0]?.name}
                 </span>
               </h3>
-
+              {/* cast */}
+              {cast.length === 0 ? (
+                ""
+              ) : (
+                <h3
+                  className="text-2xl font-bold text-gray-600 
+                dark:text-gray-500"
+                >
+                  Cast:{" "}
+                  {cast.slice(0, 3).map((ele) => {
+                    return (
+                      <span className=" text-lg text-black dark:text-white font-medium">
+                        {ele.name},{" "}
+                      </span>
+                    );
+                  })}
+                </h3>
+              )}
               {/* Description */}
               <h3
                 className="text-2xl font-bold text-gray-600 
@@ -117,20 +134,6 @@ export default function TvShowDetails() {
                 </span>
               </h3>
 
-              {/* cast */}
-              <h3
-                className="text-2xl font-bold text-gray-600 
-                dark:text-gray-500"
-              >
-                Cast:{" "}
-                {cast.slice(0, 3).map((ele) => {
-                  return (
-                    <span className=" text-lg text-black dark:text-white font-medium">
-                      {ele.name},{" "}
-                    </span>
-                  );
-                })}
-              </h3>
               {/* View Seasons */}
               <Link
                 to={"/tv-show/" + id + "/seasons"}

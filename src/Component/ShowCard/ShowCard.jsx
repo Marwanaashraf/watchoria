@@ -23,11 +23,11 @@ export default function ShowCard({ show, type }) {
           <img
             className="w-full group-hover:scale-[1.1] duration-300 "
             src={`https://image.tmdb.org/t/p/w500/${show.poster_path}`}
-            alt={type === "movie" ? show.title : show.name}
+            alt={type === "movie" ? show.title?.split(" ").slice(0,4): show.name?.split(" ").slice(0,4)}
           />
-          <div className="group-hover:top-[75%] group-hover:bottom-0 bg-gradient-to-t from-35% from-black/90 to-transparent  duration-300  absolute top-full left-0 right-0 -bottom-20 mx-auto flex justify-center items-center">
+          <div className="group-hover:top-[70%] group-hover:bottom-0 bg-gradient-to-t from-35% from-black/90 to-transparent  duration-300  absolute top-full left-0 right-0 -bottom-20 mx-auto flex justify-center items-center">
             <div className="w-[90%] mx-auto ">
-              <h1 className="text-base uppercase text-white font-bold text-shadow">
+              <h1 className="text-base uppercase text-white font-bold text-shadow line-clamp-2">
                 {type === "movie" ? show.title : show.name}
               </h1>
               <p className="text-base text-gray-300 text-shadow">

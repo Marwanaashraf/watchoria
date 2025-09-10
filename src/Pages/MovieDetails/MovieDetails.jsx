@@ -123,7 +123,7 @@ export default function MovieDetails() {
                 </h3>
 
                 {/* cast */}
-                <h3
+                {cast.length === 0 ? "":<h3
                   className="text-2xl font-bold text-gray-600 
                 dark:text-gray-500"
                 >
@@ -135,7 +135,8 @@ export default function MovieDetails() {
                       </span>
                     );
                   })}
-                </h3>
+                </h3>}
+                
 
                 {/* Description */}
                 <h3

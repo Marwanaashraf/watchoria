@@ -68,7 +68,7 @@ export default function SpecificSeason() {
             )}
 
             <div className="flex flex-col space-y-3">
-              <h3 className="text-4xl font-bold uppercase">
+              <h3 className="text-2xl font-bold ">
                 {seasonData?.name}({seasonData?.air_date?.split("-")[0]})
               </h3>
               <span

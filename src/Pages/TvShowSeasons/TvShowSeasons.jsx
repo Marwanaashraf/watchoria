@@ -76,10 +76,9 @@ export default function TvShowSeasons() {
 
             <div className="flex flex-col space-y-3">
                {/* head */}
-              <h1 className="text-4xl font-bold uppercase">{tvShow.name}</h1>
-
+              <h1 className="text-2xl font-bold uppercase line-clamp-2">{tvShow.name}</h1>
               {/* year, seasons , Episodes */}
-              <div className="flex space-x-2 text-base text-slate-600 dark:text-slate-400">
+              <div className="flex space-x-2 md:text-base text-slate-600 dark:text-slate-400 text-xs ">
                 <span>
                   {tvShow.first_air_date?.split("-")[0]}
                   {tvShow.first_air_date?.split("-")[0] ===
@@ -106,7 +105,7 @@ export default function TvShowSeasons() {
 
           <div className="my-8">
             {/* num of seasons */}
-            <h1 className="text-4xl font-bold">Seasons <span className="text-slate-600 dark:text-slate-500">
+            <h1 className="text-3xl font-bold">Seasons <span className="text-slate-600 dark:text-slate-500">
                 {tvShow?.number_of_seasons}
               </span></h1>
               
