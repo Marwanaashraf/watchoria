@@ -1,0 +1,15 @@
+import axios from "axios";
+import { options } from "./options.js";
+
+export async function getSeries(data) {
+  
+  let req = await axios
+    .get(
+      `https://api.themoviedb.org/3/tv/${data.type}?language=en-US&page=${data.page}`,
+      options
+    )
+    .catch((err) => {
+      console.error(err);
+    });
+  return req.data;
+}

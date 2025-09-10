@@ -1,17 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { getSearch } from "../Apis/getSearch.js";
 
-const { ApiKey } = require("../assets/Default/Default.js");
-async function getSearch(value) {
-  let req = await axios
-    .get(
-      `https://api.themoviedb.org/3/search/multi?api_key=${ApiKey}&query=${value}`
-    )
-    .catch((err) => {
-      console.log(err);
-    });
-  return req.data;
-}
+
 export let getAllData = createAsyncThunk("search/getAllData", getSearch);
 let SearchSlice = createSlice({
   name: "search",

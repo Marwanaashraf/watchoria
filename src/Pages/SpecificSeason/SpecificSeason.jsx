@@ -1,35 +1,22 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ApiKey } from "../../assets/Default/Default.js";
 import defaultImage from "../../assets/images/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg";
-import logo from "../../assets/images/Watchix.png";
 import { Helmet } from "react-helmet";
 import Loading from "../../Component/Loading/Loading.jsx";
+import { getEpisodesData } from "../../Apis/getEpisodes.js";
 export default function SpecificSeason() {
   let { type, id, season } = useParams();
   let navigate = useNavigate();
+  //season data
   let [seasonData, setSeason] = useState();
-  let [episodes, setEpisodes] = useState([]);
   let [loading, setLoading] = useState({});
   async function getEpisodes() {
     setLoading(true);
-    let req = await axios
-      .get(
-        `https://api.themoviedb.org/3/tv/${id}/season/${season}?api_key=${ApiKey}
-`
-      )
-      .catch((err) => {
-        setLoading(false);
-        console.log(err);
-      });
-    console.log(req);
-
-    setSeason(req.data);
-    setLoading(false);
-  }
-  function backToSeasons() {
-    navigate(`/tv-show/${id}/seasons`);
+    let data = await getEpisodesData(id, season);
+    if (data) {
+      setLoading(false);
+      setSeason(data);
+    }
   }
   useEffect(() => {
     getEpisodes();
@@ -68,11 +55,13 @@ export default function SpecificSeason() {
             )}
 
             <div className="flex flex-col space-y-3">
-              <h3 className="text-2xl font-bold ">
+              <h3 className="text-xl md:text-2xl font-bold line-clamp-2">
                 {seasonData?.name}({seasonData?.air_date?.split("-")[0]})
               </h3>
               <span
-                onClick={backToSeasons}
+                onClick={() => {
+                  navigate(`/tv-show/${id}/seasons`);
+                }}
                 className="text-slate-600 dark:text-slate-400 cursor-pointer hover:text-red-600 hover:dark:text-red-600 "
               >
                 <i className="fa-solid fa-arrow-left"></i> Back To Seasons List

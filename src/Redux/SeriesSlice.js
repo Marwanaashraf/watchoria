@@ -1,25 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { getSeries } from "../Apis/getSeries.js";
 
-async function getSeries(data) {
-  const options = {
-    headers: {
-      accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NmUzYjlhMjkxYzQxOThlZDY3M2VjMTExNGUzNjFlNyIsIm5iZiI6MTc1MTQwOTc1OC43NDIsInN1YiI6IjY4NjQ2NDVlYTAzZmZmYzRjMmNjZGM1OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.P5hWPGE6zh0J59tmTpJpZQaUftGDxS38lH7fT94GrgI",
-    },
-  };
 
-  let req = await axios
-    .get(
-      `https://api.themoviedb.org/3/tv/${data.type}?language=en-US&page=${data.page}`,
-      options
-    )
-    .catch((err) => {
-      console.error(err);
-    });
-  return req.data;
-}
 export let getTvShows = createAsyncThunk("series/getShows", getSeries);
 let SeriesSlice = createSlice({
   name: "tvshows",

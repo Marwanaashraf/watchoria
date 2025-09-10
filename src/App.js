@@ -13,26 +13,31 @@ import TvShowSeasons from "./Pages/TvShowSeasons/TvShowSeasons.jsx";
 import SpecificSeason from "./Pages/SpecificSeason/SpecificSeason.jsx";
 import SearchAll from "./Pages/SearchAll/SearchAll.jsx";
 import MovieTrailer from "./Pages/MovieTrailer/MovieTrailer.jsx";
+import ActorProfile from "./Pages/ActorProfile/ActorProfile.jsx";
 
 export default function App() {
-  let routes = createBrowserRouter([
-    {
-      path: "",
-      element: <Layout />,
-      children: [
-        { path: "", element: <Home /> },
-        { path: "movies/:type", element: <Movies /> },
-        { path: "movie/:id", element: <MovieDetails /> },
-        { path: "movie/:id/trailer", element: <MovieTrailer /> },
-        { path: "tv-shows/:type", element: <TvShows /> },
-        { path: "tv-show/:id", element: <TvShowDetails /> },
-        { path: "tv-show/:id/seasons", element: <TvShowSeasons /> },
-        { path: "tv-show/:id/seasons/:season", element: <SpecificSeason /> },
-        { path: "search", element: <SearchAll /> },
-        { path: "*", element: <NotFound /> },
-      ]
-    },
-  ],{basename:"/watchoria"});
+  let routes = createBrowserRouter(
+    [
+      {
+        path: "",
+        element: <Layout />,
+        children: [
+          { path: "", element: <Home /> },
+          { path: "movies/:type", element: <Movies /> },
+          { path: "movie/:id", element: <MovieDetails /> },
+          { path: "movie/:id/trailer", element: <MovieTrailer /> },
+          { path: "tv-shows/:type", element: <TvShows /> },
+          { path: "tv-show/:id", element: <TvShowDetails /> },
+          { path: "tv-show/:id/seasons", element: <TvShowSeasons /> },
+          { path: "tv-show/:id/seasons/:season", element: <SpecificSeason /> },
+          { path: "cast/:id", element: <ActorProfile /> },
+          { path: "search", element: <SearchAll /> },
+          { path: "*", element: <NotFound /> },
+        ],
+      },
+    ],
+    { basename: "/watchoria" }
+  );
   return (
     <>
       <Provider store={ConfigStore}>

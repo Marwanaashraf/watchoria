@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ApiKey } from "../../assets/Default/Default.js";
 import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import { getTvShow } from "../../Redux/TvShowDetails.js";
@@ -114,10 +113,13 @@ export default function TvShowDetails() {
                 dark:text-gray-500"
                 >
                   Cast:{" "}
-                  {cast.slice(0, 3).map((ele) => {
+                  {cast.slice(0,3).map((ele, i) => {
                     return (
-                      <span className=" text-lg text-black dark:text-white font-medium">
-                        {ele.name},{" "}
+                      <span
+                        key={ele.name}
+                        className=" text-lg text-black dark:text-white font-medium"
+                      >
+                        {ele.name} {i < cast.slice(0,3).length - 1 ? ", " : ""}
                       </span>
                     );
                   })}
@@ -129,7 +131,7 @@ export default function TvShowDetails() {
                 dark:text-gray-500"
               >
                 Description:{" "}
-                <span className=" text-lg text-black dark:text-white font-medium">
+                <span className=" text-base text-black dark:text-white font-medium">
                   {tvShow.overview}
                 </span>
               </h3>

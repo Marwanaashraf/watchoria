@@ -1,47 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { ApiKey } from "../../assets/Default/Default.js";
-import axios from "axios";
 import { Helmet } from "react-helmet";
-import logo from "../../assets/images/Watchix.png";
 import defaultImage from "../../assets/images/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg";
 import Loading from "../../Component/Loading/Loading.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { getTvShow } from "../../Redux/TvShowDetails.js";
 export default function TvShowSeasons() {
-  let {  id } = useParams();
-  let [tvShow, setTvShow] = useState({});
-  let [loading, setLoading] = useState({});
+  //tvshow id
+  let { id } = useParams();
+  let disp = useDispatch();
   let navigate = useNavigate();
-  async function getTvShow(tvShowId = id) {
-    const options = {
-      headers: {
-        accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NmUzYjlhMjkxYzQxOThlZDY3M2VjMTExNGUzNjFlNyIsIm5iZiI6MTc1MTQwOTc1OC43NDIsInN1YiI6IjY4NjQ2NDVlYTAzZmZmYzRjMmNjZGM1OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.P5hWPGE6zh0J59tmTpJpZQaUftGDxS38lH7fT94GrgI",
-      },
-    };
-    try {
-      setLoading(true);
-      let req = await axios.get(
-        `https://api.themoviedb.org/3/tv/${tvShowId}?api_key=${ApiKey}&language=en-US`,
-        options
-      );
-      console.log(req.data);
+  //get tvshow and loading from slice
+  let { tvShow, loading } = useSelector((d) => d.tvShow);
 
-      setTvShow(req.data);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      console.log(error);
-    }
-  }
-  function backToTvShow() {
-    navigate(`/tv-show/${id}`);
-  }
-  function goToEpisodes(season) {
-    navigate(`${season}`);
-  }
   useEffect(() => {
-    getTvShow();
+    disp(getTvShow(id));
   }, []);
   return (
     <>
@@ -53,7 +26,7 @@ export default function TvShowSeasons() {
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
       {loading ? (
-        <Loading/>
+        <Loading />
       ) : (
         <div className="contain my-28">
           {/* tv-show */}
@@ -75,8 +48,10 @@ export default function TvShowSeasons() {
             )}
 
             <div className="flex flex-col space-y-3">
-               {/* head */}
-              <h1 className="text-2xl font-bold uppercase line-clamp-2">{tvShow.name}</h1>
+              {/* head */}
+              <h1 className="text-xl md:text-2xlfont-bold uppercase line-clamp-2">
+                {tvShow.name}
+              </h1>
               {/* year, seasons , Episodes */}
               <div className="flex space-x-2 md:text-base text-slate-600 dark:text-slate-400 text-xs ">
                 <span>
@@ -95,7 +70,9 @@ export default function TvShowSeasons() {
                 <span>{tvShow.number_of_episodes} Episodes</span>
               </div>
               <span
-                onClick={backToTvShow}
+                onClick={() => {
+                  navigate(`/tv-show/${id}`);
+                }}
                 className="text-slate-600 dark:text-slate-400 cursor-pointer hover:text-red-600 hover:dark:text-red-600 "
               >
                 <i className="fa-solid fa-arrow-left"></i> Back To Main
@@ -105,11 +82,14 @@ export default function TvShowSeasons() {
 
           <div className="my-8">
             {/* num of seasons */}
-            <h1 className="text-3xl font-bold">Seasons <span className="text-slate-600 dark:text-slate-500">
+            <h1 className="text-3xl font-bold">
+              Seasons{" "}
+              <span className="text-slate-600 dark:text-slate-500">
                 {tvShow?.number_of_seasons}
-              </span></h1>
-              
-              {/* Seasons */}
+              </span>
+            </h1>
+
+            {/* Seasons */}
             <div className="grid grid-cols-1 gap-4 my-8 space-y-2">
               {tvShow.seasons?.map((ele) => {
                 return ele.season_number > 0 ? (
@@ -151,13 +131,17 @@ export default function TvShowSeasons() {
                   px-3 py-.5 rounded-xl text-white flex space-x-1 items-center`
                             }
                           >
-                            {ele.vote_average <=0? <>
-                            <i className="fa-solid fa-star"></i>
-                            <p>Not Rated</p>
-                            </> : <>
-                            <i className="fa-solid fa-star"></i>
-                            <p>{ele.vote_average?.toFixed(1)}</p>
-                            </>}
+                            {ele.vote_average <= 0 ? (
+                              <>
+                                <i className="fa-solid fa-star"></i>
+                                <p>Not Rated</p>
+                              </>
+                            ) : (
+                              <>
+                                <i className="fa-solid fa-star"></i>
+                                <p>{ele.vote_average?.toFixed(1)}</p>
+                              </>
+                            )}
                           </div>
                           <h5 className="text-lg text-slate-600 dark:text-slate-500">
                             {ele.air_date?.split("-")[0]}
@@ -171,7 +155,7 @@ export default function TvShowSeasons() {
                         </p>
                         <p
                           onClick={() => {
-                            goToEpisodes(ele.season_number);
+                            navigate(`${ele.season_number}`);
                           }}
                           className="text-lg cursor-pointer hover:text-red-600"
                         >

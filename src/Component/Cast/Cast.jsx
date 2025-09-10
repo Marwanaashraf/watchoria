@@ -5,7 +5,9 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation } from "swiper/modules";
 import NavBtn from "../../Component/NavBtn/NavBtn.jsx";
+import { useNavigate } from "react-router-dom";
 export default function Cast({ cast }) {
+  let navigate = useNavigate();
   return (
     <>
       <Swiper
@@ -27,7 +29,12 @@ export default function Cast({ cast }) {
           .map((ele) => {
             return (
               <SwiperSlide>
-                <div className="rounded-lg shadow-lg pl-2 h-full ">
+                <div
+                  onClick={() => {
+                    navigate(`/cast/${ele.id}`);
+                  }}
+                  className="rounded-lg shadow-lg pl-2 h-full cursor-pointer"
+                >
                   <div className="h-full">
                     <img
                       className="w-full rounded-t-lg"
@@ -50,10 +57,7 @@ export default function Cast({ cast }) {
             );
           })}
       </Swiper>
-      <NavBtn
-        className="cast-prev absolute top-1/2 -left-10"
-        iconDir="left"
-      />
+      <NavBtn className="cast-prev absolute top-1/2 -left-10" iconDir="left" />
       <NavBtn
         className="cast-next absolute top-1/2 -right-10"
         iconDir="right"
