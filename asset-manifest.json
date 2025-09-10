@@ -1,11 +1,10 @@
 {
   "files": {
-    "main.css": "/watchoria/static/css/main.af0b573f.css",
-    "main.js": "/watchoria/static/js/main.d7907696.js",
+    "main.css": "/watchoria/static/css/main.8f801052.css",
+    "main.js": "/watchoria/static/js/main.b619298f.js",
     "static/js/453.f0e78aab.chunk.js": "/watchoria/static/js/453.f0e78aab.chunk.js",
     "static/media/fa-solid-900.woff2": "/watchoria/static/media/fa-solid-900.f54756da1f3d1b88887f.woff2",
     "static/media/fa-brands-400.woff2": "/watchoria/static/media/fa-brands-400.1f6bad931d92a0a52c45.woff2",
-    "static/media/mIg1qCkVxnAlM2TK3RUF0tdEXlE.webp": "/watchoria/static/media/mIg1qCkVxnAlM2TK3RUF0tdEXlE.b4b602fdd83f098aae00.webp",
     "static/media/fa-regular-400.woff2": "/watchoria/static/media/fa-regular-400.5632c43107f4d3fa4806.woff2",
     "static/media/fa-v4compatibility.woff2": "/watchoria/static/media/fa-v4compatibility.24fc9d217708cb3f0362.woff2",
     "static/media/slick.svg": "/watchoria/static/media/slick.2630a3e3eab21c607e21.svg",
@@ -14,12 +13,12 @@
     "static/media/slick.woff": "/watchoria/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/watchoria/index.html",
     "static/media/glyphicons-basic-38-picture-grey-svg": "/watchoria/static/media/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.f9db13c5f6963815666d104105243935.svg",
-    "main.af0b573f.css.map": "/watchoria/static/css/main.af0b573f.css.map",
-    "main.d7907696.js.map": "/watchoria/static/js/main.d7907696.js.map",
+    "main.8f801052.css.map": "/watchoria/static/css/main.8f801052.css.map",
+    "main.b619298f.js.map": "/watchoria/static/js/main.b619298f.js.map",
     "453.f0e78aab.chunk.js.map": "/watchoria/static/js/453.f0e78aab.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.af0b573f.css",
-    "static/js/main.d7907696.js"
+    "static/css/main.8f801052.css",
+    "static/js/main.b619298f.js"
   ]
 }
