@@ -9,7 +9,7 @@ import { changeTvPage, getTvShows } from "../../Redux/SeriesSlice.js";
 import { getAllData } from "../../Redux/SearchSlice.js";
 import { getMovie } from "../../Redux/MovieDetails.js";
 import { getTvShow } from "../../Redux/TvShowDetails.js";
-import SearchAll from "../SearchAll/SearchAll.jsx";
+import SearchAll from "../../Pages/SearchAll/SearchAll.jsx";
 
 export default function Navbar() {
   let disp = useDispatch();

@@ -41,7 +41,7 @@ export let MovieSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(getAllMovies.rejected, (state, action) => {
-      state.loading = false;
+      state.loading = true;
     });
   },
 });

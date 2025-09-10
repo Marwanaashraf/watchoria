@@ -25,10 +25,14 @@ async function getMovieData(movieId) {
         options
       ),
     ]);
+
     return {
+      director: castReq.data.crew.find((ele) => ele.job === "Director").name,
       movies: movieReq.data,
       cast: castReq.data.cast.filter((ele) => ele.profile_path != null),
-      recomindations: recomendationReq.data.results.filter((ele) => ele.vote_average != 0).slice(0, 4),
+      recomindations: recomendationReq.data.results
+        .filter((ele) => ele.vote_average != 0)
+        .slice(0, 10),
     };
   } catch (err) {
     console.log(err);
@@ -38,7 +42,13 @@ async function getMovieData(movieId) {
 export let getMovie = createAsyncThunk("movie/getMovieDetails", getMovieData);
 export let MovieSlice = createSlice({
   name: "movie",
-  initialState: { movie: {}, loading: true, cast: [], recomindations: [] },
+  initialState: {
+    movie: {},
+    loading: true,
+    cast: [],
+    recomindations: [],
+    director: "",
+  },
   extraReducers: (builder) => {
     builder.addCase(getMovie.pending, (state, action) => {
       state.loading = true;
@@ -47,10 +57,11 @@ export let MovieSlice = createSlice({
       state.movie = action.payload.movies;
       state.cast = action.payload.cast;
       state.recomindations = action.payload.recomindations;
+      state.director = action.payload.director;
       state.loading = false;
     });
     builder.addCase(getMovie.rejected, (state, action) => {
-      state.loading = false;
+      state.loading = true;
     });
   },
 });

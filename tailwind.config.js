@@ -5,11 +5,11 @@ module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      
+      colors: {
+        main: "#DC2626",
+      },
     },
   },
-  plugins: [
-      require('tailwind-scrollbar'),
-  ],
-  darkMode:"class"
+  plugins: [require("tailwind-scrollbar")],
+  darkMode: "class",
 };

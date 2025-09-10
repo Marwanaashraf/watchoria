@@ -29,7 +29,7 @@ async function getTvShowData(tvShowId) {
     return {
       tvShow: tvShowReq.data,
       cast: castReq.data.cast.filter((ele) => ele.profile_path != null),
-      recomindations: recomindReq.data.results.filter((ele) => ele.vote_average != 0).slice(0, 4),
+      recomindations: recomindReq.data.results.filter((ele) => ele.vote_average != 0 && ele.poster_path).slice(0, 10),
     };
   } catch (error) {
     console.log(error);
@@ -53,7 +53,7 @@ export let tvShowSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(getTvShow.rejected, (state, action) => {
-      state.loading = false;
+      state.loading = true;
     });
   },
 });

@@ -47,7 +47,7 @@ let SeriesSlice = createSlice({
     });
     builder.addCase(getTvShows.rejected, (state, action) => {
       state.err = action.error;
-      state.loading = false;
+      state.loading = true;
     });
   },
 });

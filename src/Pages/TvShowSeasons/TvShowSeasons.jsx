@@ -5,6 +5,7 @@ import axios from "axios";
 import { Helmet } from "react-helmet";
 import logo from "../../assets/images/Watchix.png";
 import defaultImage from "../../assets/images/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg";
+import Loading from "../../Component/Loading/Loading.jsx";
 export default function TvShowSeasons() {
   let {  id } = useParams();
   let [tvShow, setTvShow] = useState({});
@@ -52,12 +53,12 @@ export default function TvShowSeasons() {
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
       {loading ? (
-        <div className="loading flex justify-center items-center fixed top-0 left-0 bottom-0 right-0 bg-slate-950 z-50">
-          <img className="loader w-20" src={logo} alt="" />
-        </div>
+        <Loading/>
       ) : (
         <div className="contain my-28">
+          {/* tv-show */}
           <div className="flex space-x-4 items-center bg-slate-200 dark:bg-slate-800 p-3 rounded-lg">
+            {/* poster */}
             {tvShow.poster_path != null ? (
               <img
                 className="w-20 rounded-lg"
@@ -74,13 +75,26 @@ export default function TvShowSeasons() {
             )}
 
             <div className="flex flex-col space-y-3">
-              <h3 className="text-4xl font-bold">
-                {tvShow.name} ({tvShow.first_air_date?.split("-")[0]})
-              </h3>
-              <p className="text-lg text-slate-500 dark:text-slate-400">
-                .{tvShow.number_of_seasons} Seasons .
-                {tvShow.number_of_episodes} Episodes
-              </p>
+               {/* head */}
+              <h1 className="text-4xl font-bold uppercase">{tvShow.name}</h1>
+
+              {/* year, seasons , Episodes */}
+              <div className="flex space-x-2 text-base text-slate-600 dark:text-slate-400">
+                <span>
+                  {tvShow.first_air_date?.split("-")[0]}
+                  {tvShow.first_air_date?.split("-")[0] ===
+                  tvShow.last_air_date?.split("-")[0]
+                    ? ""
+                    : "-" + tvShow.last_air_date?.split("-")[0]}
+                </span>
+
+                <span>
+                  {tvShow.number_of_seasons === 1
+                    ? tvShow.number_of_seasons + " Season"
+                    : tvShow.number_of_seasons + " Seasons"}
+                </span>
+                <span>{tvShow.number_of_episodes} Episodes</span>
+              </div>
               <span
                 onClick={backToTvShow}
                 className="text-slate-600 dark:text-slate-400 cursor-pointer hover:text-red-600 hover:dark:text-red-600 "
@@ -91,9 +105,12 @@ export default function TvShowSeasons() {
           </div>
 
           <div className="my-8">
+            {/* num of seasons */}
             <h1 className="text-4xl font-bold">Seasons <span className="text-slate-600 dark:text-slate-500">
                 {tvShow?.number_of_seasons}
               </span></h1>
+              
+              {/* Seasons */}
             <div className="grid grid-cols-1 gap-4 my-8 space-y-2">
               {tvShow.seasons?.map((ele) => {
                 return ele.season_number > 0 ? (

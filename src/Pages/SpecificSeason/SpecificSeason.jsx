@@ -5,6 +5,7 @@ import { ApiKey } from "../../assets/Default/Default.js";
 import defaultImage from "../../assets/images/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg";
 import logo from "../../assets/images/Watchix.png";
 import { Helmet } from "react-helmet";
+import Loading from "../../Component/Loading/Loading.jsx";
 export default function SpecificSeason() {
   let { type, id, season } = useParams();
   let navigate = useNavigate();
@@ -45,9 +46,7 @@ export default function SpecificSeason() {
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
       {loading ? (
-        <div className="loading flex justify-center items-center fixed top-0 left-0 bottom-0 right-0 bg-slate-950 z-50">
-          <img className="loader w-20" src={logo} alt="" />
-        </div>
+        <Loading />
       ) : (
         <div className="my-28 contain">
           <div className="flex space-x-4 items-center bg-slate-200 dark:bg-slate-800 p-3 rounded-lg">
@@ -69,7 +68,7 @@ export default function SpecificSeason() {
             )}
 
             <div className="flex flex-col space-y-3">
-              <h3 className="text-4xl font-bold">
+              <h3 className="text-4xl font-bold uppercase">
                 {seasonData?.name}({seasonData?.air_date?.split("-")[0]})
               </h3>
               <span
@@ -91,7 +90,10 @@ export default function SpecificSeason() {
               {seasonData?.episodes?.map((ele) => {
                 return (
                   <>
-                    <div key={ele.id} className="grid grid-cols-1 lg:grid-cols-5 md:grid-cols-6 gap-4 items-center">
+                    <div
+                      key={ele.id}
+                      className="grid grid-cols-1 lg:grid-cols-5 md:grid-cols-6 gap-4 items-center"
+                    >
                       <div className="lg:col-span-1 md:col-span-2">
                         {ele.still_path != null ? (
                           <img
@@ -128,24 +130,32 @@ export default function SpecificSeason() {
                   px-3 py-.5 rounded-xl text-white flex space-x-1 items-center`
                             }
                           >
-                            {ele.vote_average <=0? <>
-                            <i className="fa-solid fa-star"></i>
-                            <p>Not Rated</p>
-                            </> : <>
-                            <i className="fa-solid fa-star"></i>
-                            <p>{ele.vote_average?.toFixed(1)}</p>
-                            </>}
+                            {ele.vote_average <= 0 ? (
+                              <>
+                                <i className="fa-solid fa-star"></i>
+                                <p>Not Rated</p>
+                              </>
+                            ) : (
+                              <>
+                                <i className="fa-solid fa-star"></i>
+                                <p>{ele.vote_average?.toFixed(1)}</p>
+                              </>
+                            )}
                           </div>
-                          {ele.runtime != null?<h4 className="text-slate-600 dark:text-slate-500">
-                            <i className="fa-solid fa-clock"></i>{" "}
-                            {ele.runtime > 60
-                              ? (ele.runtime / 60).toFixed(0) +
-                                "h " +
-                                (ele.runtime % 60) +
-                                "min"
-                              : ele.runtime + "min"}
-                          </h4> : ""}
-                          
+                          {ele.runtime != null ? (
+                            <h4 className="text-slate-600 dark:text-slate-500">
+                              <i className="fa-solid fa-clock"></i>{" "}
+                              {ele.runtime > 60
+                                ? (ele.runtime / 60).toFixed(0) +
+                                  "h " +
+                                  (ele.runtime % 60) +
+                                  "min"
+                                : ele.runtime + "min"}
+                            </h4>
+                          ) : (
+                            ""
+                          )}
+
                           <h4 className="text-slate-600 dark:text-slate-500">
                             {ele.air_date}
                           </h4>

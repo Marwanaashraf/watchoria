@@ -1,8 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 body {
   @apply dark:bg-slate-900 dark:text-white;
+  font-family: "Roboto", sans-serif;
 }
 hr {
   @apply dark:border-t dark:border-gray-700;
@@ -13,30 +15,12 @@ hr {
 .f-center {
   @apply flex justify-center items-center;
 }
-.text-main {
-  @apply text-red-600;
-}
-.bg-main {
-  @apply bg-red-600;
-}
+
 a,
 a:hover {
   text-decoration: none;
 }
-/* .layer{
-  background-color: rgba(0, 0, 0, 0.712);
-} */
-/* .slick-dots li button{
-width: 40px;
-height: 40px;
-} */
-.slick-dots li.slick-active button:before {
-  color: red;
-}
-.slick-prev:before,
-.slick-next:before {
-  @apply dark:text-slate-300 text-slate-900 text-2xl  hover:text-red-600 hover:dark:text-red-600;
-}
+
 .search-small:focus {
   /* border: none !important;
   outline: none; */
@@ -51,7 +35,20 @@ height: 40px;
   box-sizing: border-box;
   animation: rotation 2s linear infinite;
 }
-
+.swiper-pagination-bullet {
+  width: 14px !important;
+  height: 14px !important;
+  background-color: white !important;
+  opacity: 0.5;
+}
+.text-shadow {
+ 
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.75);
+}
+.swiper-pagination-bullet-active {
+  background-color: #DC2626 !important; 
+  opacity: 1;
+}
 @keyframes rotation {
   0% {
     transform: rotate(0deg);
@@ -60,12 +57,12 @@ height: 40px;
     transform: rotate(360deg);
   }
 }
-::-webkit-scrollbar{
-  @apply w-2
+::-webkit-scrollbar {
+  @apply w-2;
 }
-::-webkit-scrollbar-track{
-  @apply bg-slate-300 dark:bg-slate-100 shadow-lg
+::-webkit-scrollbar-track {
+  @apply bg-slate-300 dark:bg-slate-100 shadow-lg;
 }
-::-webkit-scrollbar-thumb{
-  @apply bg-red-600 dark:bg-red-600 rounded-lg hover:bg-red-700 hover:dark:bg-red-600
+::-webkit-scrollbar-thumb {
+  @apply bg-red-600 dark:bg-red-600 rounded-lg hover:bg-red-700 hover:dark:bg-red-600;
 }

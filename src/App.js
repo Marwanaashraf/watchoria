@@ -1,18 +1,18 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Layout from "./Component/Layout/Layout.jsx";
-import Movies from "./Component/Movies/Movies.jsx";
-import Home from "./Component/Home/Home.jsx";
-import TvShows from "./Component/TvShows/TvShows.jsx";
+import Layout from "./Pages/Layout/Layout.jsx";
+import Movies from "./Pages/Movies/Movies.jsx";
+import Home from "./Pages/Home/Home.jsx";
+import TvShows from "./Pages/TvShows/TvShows.jsx";
 import { Provider } from "react-redux";
 import { ConfigStore } from "./Redux/store.js";
-import NotFound from "./Component/NotFound/NotFound.jsx";
-import MovieDetails from "./Component/MovieDetails/MovieDetails.jsx";
-import TvShowDetails from "./Component/TvShowDetails/TvShowDetails.jsx";
-import TvShowSeasons from "./Component/TvShowSeasons/TvShowSeasons.jsx";
-import SpecificSeason from "./Component/SpecificSeason/SpecificSeason.jsx";
-import SearchAll from "./Component/SearchAll/SearchAll.jsx";
-import MovieTrailer from "./Component/MovieTrailer/MovieTrailer.jsx";
+import NotFound from "./Pages/NotFound/NotFound.jsx";
+import MovieDetails from "./Pages/MovieDetails/MovieDetails.jsx";
+import TvShowDetails from "./Pages/TvShowDetails/TvShowDetails.jsx";
+import TvShowSeasons from "./Pages/TvShowSeasons/TvShowSeasons.jsx";
+import SpecificSeason from "./Pages/SpecificSeason/SpecificSeason.jsx";
+import SearchAll from "./Pages/SearchAll/SearchAll.jsx";
+import MovieTrailer from "./Pages/MovieTrailer/MovieTrailer.jsx";
 
 export default function App() {
   let routes = createBrowserRouter([
@@ -22,11 +22,9 @@ export default function App() {
       children: [
         { path: "", element: <Home /> },
         { path: "movies/:type", element: <Movies /> },
-        { path: "movies/:type/:id", element: <MovieDetails /> },
         { path: "movie/:id", element: <MovieDetails /> },
         { path: "movie/:id/trailer", element: <MovieTrailer /> },
         { path: "tv-shows/:type", element: <TvShows /> },
-        { path: "tv-shows/:type/:id", element: <TvShowDetails /> },
         { path: "tv-show/:id", element: <TvShowDetails /> },
         { path: "tv-show/:id/seasons", element: <TvShowSeasons /> },
         { path: "tv-show/:id/seasons/:season", element: <SpecificSeason /> },

@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ApiKey } from "../../assets/Default/Default.js";
 import { Helmet } from "react-helmet";
 import logo from "../../assets/images/Watchix.png";
+import Loading from "../../Component/Loading/Loading.jsx";
 
 export default function MovieTrailer() {
   let { id } = useParams();
@@ -61,9 +62,8 @@ export default function MovieTrailer() {
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
       {loading ? (
-        <div className="loading flex justify-center items-center fixed top-0 left-0 bottom-0 right-0 bg-slate-950 z-50">
-          <img className="loader w-20" src={logo} alt="" />
-        </div>
+                <Loading/>
+
       ) : (
         <>
           <div className="contain py-28">
