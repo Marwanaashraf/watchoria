@@ -35,8 +35,7 @@ export default function App() {
           { path: "*", element: <NotFound /> },
         ],
       },
-    ],
-    { basename: "/watchoria" }
+    ]
   );
   return (
     <>
