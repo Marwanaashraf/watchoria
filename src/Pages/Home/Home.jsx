@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllMovies } from "../../Redux/MovieSlice.js";
 import { Helmet } from "react-helmet";
-import Slider from "react-slick";
 import { useNavigate } from "react-router-dom";
 import { getTvShows } from "../../Redux/SeriesSlice.js";
 import axios from "axios";

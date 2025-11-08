@@ -8,7 +8,6 @@ import { changeTvPage, getTvShows } from "../../Redux/SeriesSlice.js";
 import { getAllData } from "../../Redux/SearchSlice.js";
 import { getMovie } from "../../Redux/MovieDetails.js";
 import { getTvShow } from "../../Redux/TvShowDetails.js";
-import SearchAll from "../../Pages/SearchAll/SearchAll.jsx";
 import NavSlider from "../NavSlider/NavSlider.jsx";
 export let movieLinks = [
   { apiName: "top_rated", htmlName: "Top Rated" },
