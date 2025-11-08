@@ -25,7 +25,6 @@ export default function TvShows() {
   };
   useEffect(() => {
     let currPage = Number(searchParams.get("page") || 1);
-
     setPage(currPage);
     disp(getTvShows({ type, page: currPage }));
     window.scrollTo({ top: 0, behavior: "smooth" });

@@ -26,9 +26,9 @@ export async function getMovieData(movieId) {
     return {
       director: castReq.data.crew.find((ele) => ele.job === "Director").name,
       movies: movieReq.data,
-      cast: castReq.data.cast.filter((ele) => ele.profile_path != null),
+      cast: castReq.data.cast.filter((ele) => ele.profile_path !== null),
       recomindations: recomendationReq.data.results
-        .filter((ele) => ele.vote_average != 0 && ele.poster_path)
+        .filter((ele) => ele.vote_average !== 0 && ele.poster_path)
         .slice(0, 10),
       trailer: trailerReq.data.results.find(
         (ele) => ele.type === "Trailer" && ele.site === "YouTube"

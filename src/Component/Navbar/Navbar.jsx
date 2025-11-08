@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
+import  { useEffect, useState } from "react";
+import { Link,  NavLink, useNavigate } from "react-router-dom";
 import $ from "jquery";
 import logo from "../../assets/images/Watchix.png";
 import { useDispatch, useSelector } from "react-redux";
@@ -58,14 +58,14 @@ export default function Navbar() {
     //set value if change
     setValue(e.target.value);
     //open tap
-    if (val != " ") {
+    if (val !== " ") {
       $(".search-track").removeClass("hidden");
     }
     //close tab
     if (!val) {
       $(".search-track").addClass("hidden");
     }
-    if (searchData == 0 && val.length != 1) {
+    if (searchData === 0 && val.length !== 1) {
       setNotFound(val);
     } else {
       setNotFound(null);
@@ -76,7 +76,7 @@ export default function Navbar() {
     console.log(val);
   }
   function navigateToDetails(type, id) {
-    if (type == "movie") {
+    if (type === "movie") {
       //close tab
       $(".search-track").addClass("hidden");
       //set value in input
@@ -84,7 +84,7 @@ export default function Navbar() {
       //navigate
       navigate(`/movie/${id}`);
       disp(getMovie(id));
-    } else if (type == "tv") {
+    } else if (type === "tv") {
       //close tab
       $(".search-track").addClass("hidden");
       //set value in input
@@ -116,8 +116,8 @@ export default function Navbar() {
     });
   }, []);
   useEffect(() => {
-    if (localStorage.getItem("darkMode") != null) {
-      if (localStorage.getItem("darkMode") == "true") {
+    if (localStorage.getItem("darkMode") !== null) {
+      if (localStorage.getItem("darkMode") === "true") {
         setDarkMode(true);
         document.querySelector("html").classList.add("dark");
       } else {

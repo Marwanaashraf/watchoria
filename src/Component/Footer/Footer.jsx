@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import logo from "../../assets/images/Watchix.png";
 import { Link, NavLink } from "react-router-dom";
 import { changeMoviePage, getAllMovies } from "../../Redux/MovieSlice.js";
@@ -15,22 +15,22 @@ export default function Footer() {
     disp(getAllMovies({ type, page: 1 }));
   }
   function mDropDown() {
-    if (moviesFooter == true) {
+    if (moviesFooter === true) {
       setMoviesFooter(false);
 
       $(".movis-dropdown").slideUp(400);
-    } else if (moviesFooter == false) {
+    } else if (moviesFooter === false) {
       setMoviesFooter(true);
 
       $(".movis-dropdown").slideDown(400);
     }
   }
   function tvDropDown() {
-    if (tvFooter == true) {
+    if (tvFooter === true) {
       setTvFooter(false);
 
       $(".series-dropdown").slideUp(400);
-    } else if (tvFooter == false) {
+    } else if (tvFooter === false) {
       setTvFooter(true);
 
       $(".series-dropdown").slideDown(400);

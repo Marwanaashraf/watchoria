@@ -51,7 +51,6 @@ export default function ActorProfile() {
       biography.classList.remove("line-clamp-3");
     }
   }
-  console.log(cast.filter((ele) => ele.media_type === "tv"));
   function toggleDropDown(type) {
     if (type === "movie") {
       if (moviesDropDown) {
