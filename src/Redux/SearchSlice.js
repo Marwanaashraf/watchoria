@@ -16,7 +16,7 @@ let SearchSlice = createSlice({
     });
     builder.addCase(getAllData.fulfilled, (state, action) => {
       state.searchData = action.payload.results.filter(
-        (ele) => ele.media_type != "person"
+        (ele) => ele.media_type !== "person"
       );
       state.totalPages = action.payload.total_pages;
       state.loading = false;
