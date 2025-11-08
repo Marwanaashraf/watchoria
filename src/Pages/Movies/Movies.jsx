@@ -34,7 +34,7 @@ export default function Movies() {
     setPage(currPage);
     disp(getAllMovies({ type, page: currPage }));
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [searchParams, type]);
+  }, [searchParams, type, disp]);
 
   return (
     <>

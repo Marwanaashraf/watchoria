@@ -28,7 +28,7 @@ export default function TvShows() {
     setPage(currPage);
     disp(getTvShows({ type, page: currPage }));
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [searchParams, type]);
+  }, [searchParams, type,disp]);
   return (
     <>
       <Helmet>
