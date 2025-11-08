@@ -5,7 +5,6 @@ import { getAllMovies } from "../../Redux/MovieSlice.js";
 import { useParams, useSearchParams } from "react-router-dom";
 import Loading from "../../Component/Loading/Loading.jsx";
 import ShowCard from "../../Component/ShowCard/ShowCard.jsx";
-import clsx from "clsx";
 import Pagination from "../../Component/Pagination/Pagination.jsx";
 export default function Movies() {
   let { type } = useParams();

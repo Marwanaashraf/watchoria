@@ -1,10 +1,8 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import logo from "../../assets/images/Watchix.png";
 import Loading from "../../Component/Loading/Loading.jsx";
-import { ApiKey, options } from "../../Apis/options.js";
 import { useDispatch, useSelector } from "react-redux";
 import { getMovie } from "../../Redux/MovieDetails.js";
 

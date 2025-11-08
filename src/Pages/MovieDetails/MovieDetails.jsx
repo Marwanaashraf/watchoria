@@ -1,7 +1,6 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getMovie } from "../../Redux/MovieDetails.js";
 import Loading from "../../Component/Loading/Loading.jsx";
@@ -122,20 +121,27 @@ export default function MovieDetails() {
                 </h3>
 
                 {/* cast */}
-                {cast.length === 0 ? "":<h3
-                  className="text-2xl font-bold text-gray-600 
+                {cast.length === 0 ? (
+                  ""
+                ) : (
+                  <h3
+                    className="text-2xl font-bold text-gray-600 
                 dark:text-gray-500"
-                >
-                  Cast:{" "}
-                  {cast.slice(0, 3).map((ele,i) => {
-                    return (
-                      <span key={ele.name} className=" text-lg text-black dark:text-white font-medium">
-                        {ele.name}{i < cast.slice(0,3).length - 1 ? ", " : ""}
-                      </span>
-                    );
-                  })}
-                </h3>}
-                
+                  >
+                    Cast:{" "}
+                    {cast.slice(0, 3).map((ele, i) => {
+                      return (
+                        <span
+                          key={ele.name}
+                          className=" text-lg text-black dark:text-white font-medium"
+                        >
+                          {ele.name}
+                          {i < cast.slice(0, 3).length - 1 ? ", " : ""}
+                        </span>
+                      );
+                    })}
+                  </h3>
+                )}
 
                 {/* Description */}
                 <h3

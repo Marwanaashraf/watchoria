@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllData } from "../../Redux/SearchSlice.js";
 import { Link, useNavigate } from "react-router-dom";

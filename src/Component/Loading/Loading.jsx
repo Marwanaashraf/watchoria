@@ -1,4 +1,4 @@
-import React from "react";
+
 import logo from "../../assets/images/Watchix.png";
 
 export default function Loading() {

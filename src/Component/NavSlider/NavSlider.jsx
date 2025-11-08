@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/images/Watchix.png";
 import { movieLinks, showsLinks } from "../Navbar/Navbar.jsx";
