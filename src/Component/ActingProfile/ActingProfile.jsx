@@ -1,3 +1,4 @@
+import { CircleAlert } from "lucide-react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -52,19 +53,8 @@ export default function ActingProfile({ show }) {
         </div>
       </div>
 
-      <div className="bg-transparent hover:bg-red-100 hover:dark:bg-red-200 duration-300 w-12 h-12 rounded-full flex justify-center items-center text-main cursor-pointer">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="25"
-          height="25"
-          className="ipc-icon ipc-icon--info"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          role="presentation"
-        >
-          <path fill="none" d="M0 0h24v24H0V0z"></path>
-          <path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path>
-        </svg>
+      <div className="bg-transparent hover:bg-main/30 hover:dark:bg-main/30  duration-300 w-12 h-12 rounded-full flex justify-center items-center text-main cursor-pointer">
+        <CircleAlert className="w-5 h-5" />
       </div>
     </div>
   );

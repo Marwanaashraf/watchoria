@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
@@ -7,6 +6,8 @@ import { getTvShow } from "../../Redux/TvShowDetails.js";
 import Loading from "../../Component/Loading/Loading.jsx";
 import Cast from "../../Component/Cast/Cast.jsx";
 import Recomindations from "../../Component/Recomindations/Recomindations.jsx";
+import NotFoundPage from "../../Component/NotFoundPage/NotFoundPage.jsx";
+import StaticImage from "../../Component/StaticImage/StaticImage.jsx";
 export default function TvShowDetails() {
   let { type, id } = useParams();
   let { tvShow, loading, cast, recomindations } = useSelector((d) => d.tvShow);
@@ -14,7 +15,11 @@ export default function TvShowDetails() {
   useEffect(() => {
     disp(getTvShow(id));
   }, []);
+  if (Object.keys(tvShow).length === 0 && !loading) {
+    return <NotFoundPage />;
+  }
   console.log(tvShow);
+
   return (
     <>
       <Helmet>
@@ -34,6 +39,7 @@ export default function TvShowDetails() {
                 src={"https://image.tmdb.org/t/p/w500/" + tvShow?.poster_path}
                 alt={tvShow.name}
               />
+              
               <div
                 className={
                   tvShow.vote_average >= 7
@@ -63,11 +69,11 @@ export default function TvShowDetails() {
               {/* year, seasons , Episodes */}
               <div className="flex space-x-2 text-base text-slate-600 dark:text-slate-400">
                 <span>
-                  {tvShow.first_air_date?.split("-")[0]}
-                  {tvShow.first_air_date?.split("-")[0] ===
-                  tvShow.last_air_date?.split("-")[0]
+                  {new Date(tvShow.first_air_date)?.getFullYear()}
+                  {new Date(tvShow.first_air_date)?.getFullYear() ===
+                  new Date(tvShow.last_air_date)?.getFullYear()
                     ? ""
-                    : "-" + tvShow.last_air_date?.split("-")[0]}
+                    : "-" + new Date(tvShow.last_air_date)?.getFullYear()}
                 </span>
 
                 <span>
@@ -113,13 +119,13 @@ export default function TvShowDetails() {
                 dark:text-gray-500"
                 >
                   Cast:{" "}
-                  {cast.slice(0,3).map((ele, i) => {
+                  {cast.slice(0, 3).map((ele, i) => {
                     return (
                       <span
                         key={ele.name}
                         className=" text-lg text-black dark:text-white font-medium"
                       >
-                        {ele.name} {i < cast.slice(0,3).length - 1 ? ", " : ""}
+                        {ele.name} {i < cast.slice(0, 3).length - 1 ? ", " : ""}
                       </span>
                     );
                   })}

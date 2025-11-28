@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTvShows } from "../../Redux/SeriesSlice.js";
 import { useParams, useSearchParams } from "react-router-dom";
@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet";
 import Loading from "../../Component/Loading/Loading.jsx";
 import ShowCard from "../../Component/ShowCard/ShowCard.jsx";
 import Pagination from "../../Component/Pagination/Pagination.jsx";
+import NotFoundPage from "../../Component/NotFoundPage/NotFoundPage.jsx";
 
 export default function TvShows() {
   let [searchParams, setSearchParams] = useSearchParams();
@@ -28,7 +29,12 @@ export default function TvShows() {
     setPage(currPage);
     disp(getTvShows({ type, page: currPage }));
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [searchParams, type,disp]);
+  }, [searchParams, type]);
+
+  if (seriesList.length === 0 && !loading) {
+    return <NotFoundPage />;
+  }
+
   return (
     <>
       <Helmet>

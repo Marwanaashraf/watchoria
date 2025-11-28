@@ -17,11 +17,12 @@ export let MovieSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(getMovie.fulfilled, (state, action) => {
-      state.movie = action.payload.movies;
-      state.cast = action.payload.cast;
-      state.recomindations = action.payload.recomindations;
-      state.trailer = action.payload.trailer;
-      state.director = action.payload.director;
+      const payload = action.payload || {};
+      state.movie = payload.movie || {};
+      state.cast = payload.cast || [];
+      state.recomindations = payload.recomindations || [];
+      state.trailer = payload.trailer || {};
+      state.director = payload.director || "";
       state.loading = false;
     });
     builder.addCase(getMovie.rejected, (state, action) => {

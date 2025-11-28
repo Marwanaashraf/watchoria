@@ -7,6 +7,8 @@ import Loading from "../../Component/Loading/Loading.jsx";
 
 import Cast from "../../Component/Cast/Cast.jsx";
 import Recomindations from "../../Component/Recomindations/Recomindations.jsx";
+import clsx from "clsx";
+import NotFoundPage from "../../Component/NotFoundPage/NotFoundPage.jsx";
 export default function MovieDetails() {
   let { type, id } = useParams();
   let { movie, loading, cast, recomindations, director } = useSelector(
@@ -21,7 +23,10 @@ export default function MovieDetails() {
   useEffect(() => {
     disp(getMovie(id));
   }, []);
-  console.log(cast);
+  if (Object.keys(movie).length === 0 && !loading) {
+    return <NotFoundPage />;
+  }
+
 
   return (
     <>
@@ -45,18 +50,16 @@ export default function MovieDetails() {
                   alt={movie.title}
                 />
                 <div
-                  className={
-                    movie.vote_average >= 7
-                      ? `absolute top-2 right-2 bg-green-500 
-                  px-3 py-.5 rounded-xl text-white flex space-x-1 items-center`
+                  className={clsx(
+                    "absolute top-2 right-2 px-2 h-6 rounded-xl text-white flex space-x-1 items-center",
+                    movie.vote_average === 0
+                      ? ""
+                      : movie.vote_average >= 7
+                      ? "bg-green-500 "
                       : movie.vote_average >= 5
-                      ? `absolute top-2 right-2 bg-yellow-500 
-                  px-3 py-.5 rounded-xl text-white flex space-x-1 items-center`
-                      : movie.vote_average < 5 && movie.vote_average != 0
-                      ? `absolute top-2 right-2 bg-red-500 
-                  px-3 py-.5 rounded-xl text-white flex space-x-1 items-center`
-                      : ""
-                  }
+                      ? "bg-yellow-500"
+                      : "bg-red-500 "
+                  )}
                 >
                   {movie.vote_average == 0 ? (
                     ""
@@ -97,7 +100,7 @@ export default function MovieDetails() {
                 </div>
                 {/* Genres */}
                 <div className="flex space-x-3">
-                  {movie.genres.map((ele) => {
+                  {movie?.genres.map((ele) => {
                     return (
                       <div
                         key={ele.id}
@@ -129,7 +132,7 @@ export default function MovieDetails() {
                 dark:text-gray-500"
                   >
                     Cast:{" "}
-                    {cast.slice(0, 3).map((ele, i) => {
+                    {cast?.slice(0, 3).map((ele, i) => {
                       return (
                         <span
                           key={ele.name}

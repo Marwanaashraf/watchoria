@@ -1,5 +1,5 @@
-import  { useEffect, useState } from "react";
-import { Link,  NavLink, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import $ from "jquery";
 import logo from "../../assets/images/Watchix.png";
 import { useDispatch, useSelector } from "react-redux";
@@ -160,9 +160,8 @@ export default function Navbar() {
                   <div className="absolute top-7 left-0 bg-slate-50 dark:bg-slate-800 shadow-lg rounded-lg flex-col p-2 space-y-3 w-32 ">
                     {movieLinks.map((ele) => {
                       return (
-                        <>
+                        <div key={ele.apiName}>
                           <NavLink
-                            key={ele.apiName}
                             onClick={() => {
                               getMoviesType(ele.apiName);
                             }}
@@ -176,7 +175,7 @@ export default function Navbar() {
                             {ele.htmlName}
                           </NavLink>
                           {ele.apiName === "upcoming" ? "" : <hr />}
-                        </>
+                        </div>
                       );
                     })}
                   </div>

@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllMovies } from "../../Redux/MovieSlice.js";
-import { useParams, useSearchParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import Loading from "../../Component/Loading/Loading.jsx";
 import ShowCard from "../../Component/ShowCard/ShowCard.jsx";
 import Pagination from "../../Component/Pagination/Pagination.jsx";
+import { CircleAlert, Home } from "lucide-react";
+import NotFoundPage from "../../Component/NotFoundPage/NotFoundPage.jsx";
 export default function Movies() {
   let { type } = useParams();
   let [searchParams, setSearchParams] = useSearchParams();
@@ -22,8 +24,6 @@ export default function Movies() {
   for (let i = 1; i <= totalPages; i++) {
     pagesList.push(i);
   }
-  const start = Math.max(0, page - 3);
-  const end = Math.min(totalPages, start + 5);
 
   function handlePagination(newPage) {
     setSearchParams({ page: newPage });
@@ -34,7 +34,12 @@ export default function Movies() {
     setPage(currPage);
     disp(getAllMovies({ type, page: currPage }));
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [searchParams, type, disp]);
+  }, [searchParams, type]);
+
+  if (movieList.length === 0 && !loading) {
+    return <NotFoundPage />;
+  }
+
 
   return (
     <>
