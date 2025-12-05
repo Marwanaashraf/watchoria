@@ -1,13 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getSearch } from "../Apis/getSearch.js";
 
-
-export let getAllData = createAsyncThunk("search/getAllData", getSearch);
+export let getAllData = createAsyncThunk(
+  "search/getAllData",
+  async ({value, page}) => {
+    return await getSearch(value, page);
+  }
+);
 let SearchSlice = createSlice({
   name: "search",
   initialState: {
     searchData: [],
     loading: false,
+    totalPages: 0,
     err: "",
   },
   extraReducers: (builder) => {
@@ -15,9 +20,7 @@ let SearchSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(getAllData.fulfilled, (state, action) => {
-      state.searchData = action.payload.results.filter(
-        (ele) => ele.media_type !== "person"
-      );
+      state.searchData = action.payload.results;
       state.totalPages = action.payload.total_pages;
       state.loading = false;
     });

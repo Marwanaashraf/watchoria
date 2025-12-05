@@ -26,7 +26,7 @@ export default function MovieDetails() {
   if (Object.keys(movie).length === 0 && !loading) {
     return <NotFoundPage />;
   }
-
+  console.log((movie.runtime / 60 - Math.floor(movie.runtime / 60)) * 60);
 
   return (
     <>
@@ -84,7 +84,7 @@ export default function MovieDetails() {
                     <p className="">
                       <i className="fa-solid fa-clock  text-sm"></i>{" "}
                       {(movie.runtime / 60).toFixed(0) != 0 ? (
-                        <span>{(movie.runtime / 60).toFixed(0)}h</span>
+                        <span>{Math.floor(movie.runtime / 60)}h</span>
                       ) : (
                         ""
                       )}{" "}

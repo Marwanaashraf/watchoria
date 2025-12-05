@@ -63,7 +63,6 @@ export default function Home() {
     disp(getTvShows({ type: "airing_today", page: 1 }));
     getTrendingData();
   }, []);
-  console.log(seriesList);
 
   return (
     <>

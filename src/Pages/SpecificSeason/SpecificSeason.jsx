@@ -4,6 +4,7 @@ import defaultImage from "../../assets/images/glyphicons-basic-38-picture-grey-c
 import { Helmet } from "react-helmet";
 import Loading from "../../Component/Loading/Loading.jsx";
 import { getEpisodesData } from "../../Apis/getEpisodes.js";
+import clsx from "clsx";
 export default function SpecificSeason() {
   let { type, id, season } = useParams();
   let navigate = useNavigate();
@@ -21,6 +22,8 @@ export default function SpecificSeason() {
   useEffect(() => {
     getEpisodes();
   }, []);
+  console.log(seasonData?.episodes);
+  
   return (
     <>
       <Helmet>
@@ -76,7 +79,7 @@ export default function SpecificSeason() {
               </span>
             </h3>
             <div className="grid grid-cols-1 gap-4 my-8 space-y-5">
-              {seasonData?.episodes?.map((ele) => {
+              {seasonData?.episodes?.map((ele, i) => {
                 return (
                   <>
                     <div
@@ -108,22 +111,22 @@ export default function SpecificSeason() {
                         </h3>
                         <div className="flex space-x-2">
                           <div
-                            className={
-                              ele.vote_average >= 7
-                                ? `bg-green-500 
-                  px-2 py-.5 rounded-xl text-white flex space-x-1 items-center`
+                            className={clsx(
+                              "px-2 h-6 rounded-xl text-white flex space-x-1 items-center",
+                              ele.vote_average === 0
+                                ? ""
+                                : ele.vote_average >= 7
+                                ? "bg-green-500 "
                                 : ele.vote_average >= 5
-                                ? `bg-yellow-500 
-                  px-3 py-.5 rounded-xl text-white flex space-x-1 items-center`
-                                : `bg-red-500 
-                  px-3 py-.5 rounded-xl text-white flex space-x-1 items-center`
-                            }
+                                ? "bg-yellow-500"
+                                : "bg-red-500 "
+                            )}
                           >
                             {ele.vote_average <= 0 ? (
-                              <>
+                              <div className="px-2 h-6 rounded-xl text-white flex space-x-1 items-center bg-red-500">
                                 <i className="fa-solid fa-star"></i>
                                 <p>Not Rated</p>
-                              </>
+                              </div>
                             ) : (
                               <>
                                 <i className="fa-solid fa-star"></i>
@@ -135,7 +138,7 @@ export default function SpecificSeason() {
                             <h4 className="text-slate-600 dark:text-slate-500">
                               <i className="fa-solid fa-clock"></i>{" "}
                               {ele.runtime > 60
-                                ? (ele.runtime / 60).toFixed(0) +
+                                ? Math.floor(ele.runtime / 60) +
                                   "h " +
                                   (ele.runtime % 60) +
                                   "min"
@@ -146,7 +149,7 @@ export default function SpecificSeason() {
                           )}
 
                           <h4 className="text-slate-600 dark:text-slate-500">
-                            {ele.air_date}
+                            {ele.air_date?.split("-").reverse().join("-")}
                           </h4>
                         </div>
                         <p className="text-slate-500 dark:text-slate-400">
@@ -154,8 +157,7 @@ export default function SpecificSeason() {
                         </p>
                       </div>
                     </div>
-
-                    <hr />
+                    {seasonData?.episodes?.length - 1 === i ? "" : <hr />}
                   </>
                 );
               })}

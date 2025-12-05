@@ -46,6 +46,14 @@ a:hover {
 .text-shadow {
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.75);
 }
+.search-track {
+  @apply bg-slate-100 dark:bg-slate-900 rounded-md shadow absolute  w-96 h-64 overflow-y-auto scrollbar-thin scrollbar-track-slate-300 scrollbar-thumb-red-600 dark:scrollbar-track-slate-800 p-1 my-1;
+}
+
+.show-details {
+  @apply group-hover:top-[70%] group-hover:bottom-0 bg-gradient-to-t from-35% from-black/90 to-transparent  duration-300  absolute top-full left-0 right-0 -bottom-20 mx-auto flex justify-center items-center;
+}
+
 .swiper-pagination-bullet-active {
   background-color: #dc2626 !important;
   opacity: 1;

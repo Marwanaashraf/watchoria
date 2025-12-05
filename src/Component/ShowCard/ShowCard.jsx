@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-
 import clsx from "clsx";
 import { useState } from "react";
 import StaticImage from "../StaticImage/StaticImage.jsx";
@@ -17,7 +16,7 @@ export default function ShowCard({ show, type }) {
         className="cursor-pointer relative group overflow-hidden text-center rounded-lg h-[305px] sm:h-[375px]"
       >
         {/* loading Img */}
-        {imgLoaded === false && <StaticImage />}
+        {imgLoaded === false  && <StaticImage />}
         <img
           className="w-full h-full group-hover:scale-110 duration-300"
           src={`https://image.tmdb.org/t/p/w500/${show.poster_path}`}
@@ -30,7 +29,7 @@ export default function ShowCard({ show, type }) {
           }}
         />
 
-        <div className="group-hover:top-[70%] group-hover:bottom-0 bg-gradient-to-t from-35% from-black/90 to-transparent  duration-300  absolute top-full left-0 right-0 -bottom-20 mx-auto flex justify-center items-center">
+        <div className="show-details">
           <div className="w-[90%] mx-auto ">
             <h1 className="text-base uppercase text-white font-bold text-shadow line-clamp-2">
               {type === "movie" ? show.title : show.name}

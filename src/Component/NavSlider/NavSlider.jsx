@@ -30,8 +30,8 @@ export default function NavSlider({
   }
   return (
     <section
-      className="slider fixed top-0 bottom-0 right-0 left-0 bg-slate-200 z-40 
-       block lg:hidden  dark:bg-slate-700"
+      className="slider fixed top-0 bottom-0 right-0 left-1/2 bg-slate-200/90 z-40 
+       block lg:hidden  dark:bg-slate-700/90"
     >
       <div className="flex flex-col space-y-5 text-2xl my-5  p-4">
         <div className="mt-10 ">

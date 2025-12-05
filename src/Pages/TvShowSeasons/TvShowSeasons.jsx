@@ -1,10 +1,11 @@
-import  { useEffect } from "react";
-import {  useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import defaultImage from "../../assets/images/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg";
 import Loading from "../../Component/Loading/Loading.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { getTvShow } from "../../Redux/TvShowDetails.js";
+import clsx from "clsx";
 export default function TvShowSeasons() {
   //tvshow id
   let { id } = useParams();
@@ -91,7 +92,7 @@ export default function TvShowSeasons() {
 
             {/* Seasons */}
             <div className="grid grid-cols-1 gap-4 my-8 space-y-2">
-              {tvShow.seasons?.map((ele) => {
+              {tvShow.seasons?.map((ele, i) => {
                 return ele.season_number > 0 ? (
                   <>
                     <div className="grid grid-cols-1 md:grid-cols-4  lg:grid-cols-7 gap-4 items-center ">
@@ -120,16 +121,16 @@ export default function TvShowSeasons() {
                         </h3>
                         <div className="flex space-x-2">
                           <div
-                            className={
-                              ele.vote_average >= 7
-                                ? `bg-green-500 
-                  px-2 py-.5 rounded-xl text-white flex space-x-1 items-center`
+                            className={clsx(
+                              "px-2 h-6 rounded-xl text-white flex space-x-1 items-center",
+                              ele.vote_average === 0
+                                ? ""
+                                : ele.vote_average >= 7
+                                ? "bg-green-500 "
                                 : ele.vote_average >= 5
-                                ? `bg-yellow-500 
-                  px-3 py-.5 rounded-xl text-white flex space-x-1 items-center`
-                                : `bg-red-500 
-                  px-3 py-.5 rounded-xl text-white flex space-x-1 items-center`
-                            }
+                                ? "bg-yellow-500"
+                                : "bg-red-500 "
+                            )}
                           >
                             {ele.vote_average <= 0 ? (
                               <>
@@ -164,7 +165,7 @@ export default function TvShowSeasons() {
                         </p>
                       </div>
                     </div>
-                    <hr />
+                    {tvShow.seasons?.length - 1 === i ? "" : <hr />}
                   </>
                 ) : (
                   ""

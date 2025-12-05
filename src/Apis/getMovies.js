@@ -10,7 +10,6 @@ export async function getMovies(data) {
     .catch((err) => {
       console.error(err);
     });
-    console.log(req.data);
     
   return req.data;
 }
