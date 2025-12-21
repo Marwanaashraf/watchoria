@@ -6,15 +6,19 @@ A fully responsive movies and TV-shows web application, The platform allows user
 
 # Tools & Libraries
 
--React.js
--react-router-dom
--TailwindCSS
--Axios
--FontAwesome
--jquery
--swiper
--clsx
--react-helmet
+- React.js
+- react-router-dom
+- TailwindCSS
+- Axios
+- FontAwesome
+- jquery
+- swiper
+- clsx
+- react-helmet
+- supabase
+- formik
+- yup
+
 
 # Features
 

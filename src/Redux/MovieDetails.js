@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
-import { getMovieData } from "../Apis/getMovie.js";
+import { getMovieData } from "../Apis/Movies/getMovie.js";
 export let getMovie = createAsyncThunk("movie/getMovieDetails", getMovieData);
 export let MovieSlice = createSlice({
   name: "movie",
@@ -9,8 +9,9 @@ export let MovieSlice = createSlice({
     loading: true,
     cast: [],
     recomindations: [],
-    director: "",
-    trailer: {},
+    director: {},
+    ageRating: {},
+    streamList: [],
   },
   extraReducers: (builder) => {
     builder.addCase(getMovie.pending, (state, action) => {
@@ -20,9 +21,10 @@ export let MovieSlice = createSlice({
       const payload = action.payload || {};
       state.movie = payload.movie || {};
       state.cast = payload.cast || [];
+      state.ageRating = payload.ageRating || {};
       state.recomindations = payload.recomindations || [];
-      state.trailer = payload.trailer || {};
-      state.director = payload.director || "";
+      state.director = payload.director || {};
+      state.streamList = payload.streamList || [];
       state.loading = false;
     });
     builder.addCase(getMovie.rejected, (state, action) => {

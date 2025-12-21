@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getSearch } from "../Apis/getSearch.js";
+import { getSearch } from "../Apis/Search/getSearch.js";
 
 export let getAllData = createAsyncThunk(
   "search/getAllData",

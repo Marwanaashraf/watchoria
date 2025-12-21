@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllMovies } from "../../Redux/MovieSlice.js";
-import { Link, useParams, useSearchParams } from "react-router-dom";
-import Loading from "../../Component/Loading/Loading.jsx";
-import ShowCard from "../../Component/ShowCard/ShowCard.jsx";
-import Pagination from "../../Component/Pagination/Pagination.jsx";
-import { CircleAlert, Home } from "lucide-react";
-import NotFoundPage from "../../Component/NotFoundPage/NotFoundPage.jsx";
+import { useParams, useSearchParams } from "react-router-dom";
+import Loading from "../../Components/Loading/Loading.jsx";
+import ShowCard from "../../Components/ShowCard/ShowCard.jsx";
+import Pagination from "../../Components/ui/Pagination/Pagination.jsx";
+import NotFoundPage from "../../Components/NotFoundPage/NotFoundPage.jsx";
 export default function Movies() {
   let { type } = useParams();
+  const disp = useDispatch();
   let [searchParams, setSearchParams] = useSearchParams();
   //from redux
   let { movieList, loading, totalPages, currentPage } = useSelector(
@@ -17,7 +17,6 @@ export default function Movies() {
   );
   //currentpage
   let [page, setPage] = useState(Number(searchParams.get("page") || 1));
-  let disp = useDispatch();
 
   //All pages
   let pagesList = [];
@@ -40,7 +39,6 @@ export default function Movies() {
     return <NotFoundPage />;
   }
 
-
   return (
     <>
       <Helmet>
@@ -59,7 +57,7 @@ export default function Movies() {
               {type.split("_").join(" ")} Movies
             </span>
           </h1>
-
+          <hr className="my-2.5" />
           {/* Movies */}
           <div className="my-5 grid grid-cols-2 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 gap-4">
             {movieList.map((ele) => {

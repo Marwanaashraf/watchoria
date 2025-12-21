@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getSeries } from "../Apis/getSeries.js";
-
+import { getSeries } from "../Apis/Series/getSeries.js";
 
 export let getTvShows = createAsyncThunk("series/getShows", getSeries);
 let SeriesSlice = createSlice({

@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 body {
-  @apply bg-slate-100 dark:bg-slate-900 dark:text-white;
+  @apply bg-slate-100 dark:bg-slate-950 dark:text-white;
   font-family: "Roboto", sans-serif;
 }
 hr {
-  @apply dark:border-t border-gray-300 dark:border-gray-700;
+  @apply dark:border-t-2 border-slate-300 dark:border-slate-700;
 }
 .contain {
   @apply w-[90%] mx-auto;
@@ -20,12 +20,15 @@ a,
 a:hover {
   text-decoration: none;
 }
+.head-details {
+  @apply text-2xl font-bold text-slate-700 
+                dark:text-slate-400 capitalize;
+}
 .page-btn {
   @apply dark:bg-slate-700 bg-slate-300 p-2 rounded-lg cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:dark:opacity-40 hover:bg-slate-200 dark:hover:bg-slate-600;
 }
-.search-small:focus {
-  /* border: none !important;
-  outline: none; */
+.nav-active {
+  @apply after:content-[''] after:absolute after:-bottom-2 after:z-10 after:left-0 after:w-full after:h-1 after:bg-main text-secondry;
 }
 .loader {
   width: 48px;
@@ -47,16 +50,23 @@ a:hover {
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.75);
 }
 .search-track {
-  @apply bg-slate-100 dark:bg-slate-900 rounded-md shadow absolute  w-96 h-64 overflow-y-auto scrollbar-thin scrollbar-track-slate-300 scrollbar-thumb-red-600 dark:scrollbar-track-slate-800 p-1 my-1;
+  @apply bg-slate-100 dark:bg-slate-800 rounded-md shadow absolute  w-72 sm:w-96 lg:w-64 xl:w-96 h-64 overflow-y-auto scrollbar-thin scrollbar-track-slate-300 scrollbar-thumb-red-600 dark:scrollbar-track-slate-800 p-1 my-1;
 }
 
 .show-details {
   @apply group-hover:top-[70%] group-hover:bottom-0 bg-gradient-to-t from-35% from-black/90 to-transparent  duration-300  absolute top-full left-0 right-0 -bottom-20 mx-auto flex justify-center items-center;
 }
-
+.sort-item {
+}
 .swiper-pagination-bullet-active {
   background-color: #dc2626 !important;
   opacity: 1;
+}
+.btn-trigger {
+  @apply bg-secondry rounded-full size-12 text-white flex justify-center items-center;
+}
+.btn-content {
+  @apply bg-secondry rounded px-2 py-0.5 text-white text-sm;
 }
 @keyframes rotation {
   0% {
@@ -66,6 +76,31 @@ a:hover {
     transform: rotate(360deg);
   }
 }
+/* form */
+.form-contain {
+  @apply h-screen bg-gray-50 dark:bg-slate-950  flex justify-center items-center my-16 w-full;
+}
+.form {
+  @apply w-full sm:w-3/4 md:w-1/2 lg:w-1/3 bg-slate-50 dark:bg-slate-900 p-5 rounded-xl border border-gray-300 dark:border-slate-700 contain shadow-sm;
+}
+.form-input {
+  @apply w-full h-10 px-9 bg-slate-100 dark:bg-slate-800 border rounded-md focus:outline-none;
+}
+.form-input-border {
+  @apply border-slate-300 dark:border-slate-600 focus:border-gray-400 focus:dark:border-slate-400;
+}
+.form-error {
+  @apply text-main text-base;
+}
+.form-icon {
+  @apply w-5 h-5 text-gray-900 dark:text-white;
+}
+.form-label {
+  @apply text-gray-800 dark:text-gray-300 text-lg;
+}
+.form-btn {
+  @apply w-full h-10 bg-secondry rounded-lg hover:bg-secondry/70 duration-500 flex justify-center items-center space-x-1 disabled:opacity-65 disabled:cursor-not-allowed text-white my-3;
+}
 ::-webkit-scrollbar {
   @apply w-2;
 }
@@ -73,5 +108,5 @@ a:hover {
   @apply bg-slate-300 dark:bg-slate-100 shadow-lg;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-red-600 dark:bg-red-600 rounded-lg hover:bg-red-700 hover:dark:bg-red-600;
+  @apply bg-main  rounded-lg hover:bg-main/80 cursor-pointer;
 }

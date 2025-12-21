@@ -1,5 +1,4 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Layout from "./Pages/Layout/Layout.jsx";
 import Movies from "./Pages/Movies/Movies.jsx";
 import Home from "./Pages/Home/Home.jsx";
 import TvShows from "./Pages/TvShows/TvShows.jsx";
@@ -13,7 +12,12 @@ import SpecificSeason from "./Pages/SpecificSeason/SpecificSeason.jsx";
 import MovieTrailer from "./Pages/MovieTrailer/MovieTrailer.jsx";
 import ActorProfile from "./Pages/ActorProfile/ActorProfile.jsx";
 import SearchPage from "./Pages/SearchPage/SearchPage.jsx";
-
+import SignUp from "./Pages/auth/SignUp/SignUp.jsx";
+import Login from "./Pages/auth/Login/Login.jsx";
+import { Toaster } from "react-hot-toast";
+import * as Tooltip from "@radix-ui/react-tooltip";
+import Watchlist from "./Pages/Watchlist/Watchlist.jsx";
+import Layout from "./Components/Layout/Layout.jsx";
 export default function App() {
   let routes = createBrowserRouter([
     {
@@ -30,15 +34,22 @@ export default function App() {
         { path: "tv-show/:id/seasons/:season", element: <SpecificSeason /> },
         { path: "cast/:id", element: <ActorProfile /> },
         { path: "search/:q", element: <SearchPage /> },
+        { path: "auth/signup", element: <SignUp /> },
+        { path: "auth/login", element: <Login /> },
+        { path: "watchlist", element: <Watchlist /> },
         { path: "*", element: <NotFound /> },
       ],
     },
   ]);
+
   return (
     <>
-      <Provider store={ConfigStore}>
-        <RouterProvider router={routes} />
-      </Provider>
+      <Toaster position="top-center" />
+      <Tooltip.Provider delayDuration={200}>
+        <Provider store={ConfigStore}>
+          <RouterProvider router={routes} />
+        </Provider>
+      </Tooltip.Provider>
     </>
   );
 }

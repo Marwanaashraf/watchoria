@@ -2,21 +2,20 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import defaultImage from "../../assets/images/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg";
-import Loading from "../../Component/Loading/Loading.jsx";
+import Loading from "../../Components/Loading/Loading.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { getTvShow } from "../../Redux/TvShowDetails.js";
 import clsx from "clsx";
 export default function TvShowSeasons() {
   //tvshow id
-  let { id } = useParams();
-  let disp = useDispatch();
-  let navigate = useNavigate();
+  const { id } = useParams();
+  const disp = useDispatch();
+  const navigate = useNavigate();
   //get tvshow and loading from slice
   let { tvShow, loading } = useSelector((d) => d.tvShow);
-
   useEffect(() => {
     disp(getTvShow(id));
-  }, []);
+  }, [id]);
   return (
     <>
       <Helmet>
@@ -74,7 +73,7 @@ export default function TvShowSeasons() {
                 onClick={() => {
                   navigate(`/tv-show/${id}`);
                 }}
-                className="text-slate-600 dark:text-slate-400 cursor-pointer hover:text-red-600 hover:dark:text-red-600 "
+                className="text-slate-600 dark:text-slate-400 cursor-pointer hover:text-main hover:dark:text-main "
               >
                 <i className="fa-solid fa-arrow-left"></i> Back To Main
               </span>
@@ -84,10 +83,9 @@ export default function TvShowSeasons() {
           <div className="my-8">
             {/* num of seasons */}
             <h1 className="text-3xl font-bold">
-              Seasons{" "}
-              <span className="text-slate-600 dark:text-slate-500">
-                {tvShow?.number_of_seasons}
-              </span>
+              Seasons (
+              <span className="text-secondry">{tvShow?.number_of_seasons}</span>
+              )
             </h1>
 
             {/* Seasons */}
@@ -115,7 +113,7 @@ export default function TvShowSeasons() {
                           />
                         )}
                       </div>
-                      <div className=" md:col-span-3   lg:col-span-6 space-y-3">
+                      <div className=" md:col-span-3 lg:col-span-6 space-y-3">
                         <h3 className="font-bold text-3xl">
                           Season{ele.season_number}
                         </h3>
@@ -129,13 +127,15 @@ export default function TvShowSeasons() {
                                 ? "bg-green-500 "
                                 : ele.vote_average >= 5
                                 ? "bg-yellow-500"
-                                : "bg-red-500 "
+                                : "bg-main "
                             )}
                           >
                             {ele.vote_average <= 0 ? (
                               <>
-                                <i className="fa-solid fa-star"></i>
-                                <p>Not Rated</p>
+                                <div className="px-2 h-6 rounded-xl text-white flex space-x-1 items-center bg-main">
+                                  <i className="fa-solid fa-star"></i>
+                                  <p>Not Rated</p>
+                                </div>
                               </>
                             ) : (
                               <>
@@ -158,10 +158,10 @@ export default function TvShowSeasons() {
                           onClick={() => {
                             navigate(`${ele.season_number}`);
                           }}
-                          className="text-lg cursor-pointer hover:text-red-600"
+                          className="text-lg cursor-pointer hover:text-main"
                         >
-                          <i className="fa-solid fa-arrow-right"></i> view
-                          Episodes
+                          <i className="fa-solid fa-arrow-right"></i> View
+                          episodes
                         </p>
                       </div>
                     </div>

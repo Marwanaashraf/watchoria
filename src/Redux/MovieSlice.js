@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
-import { getMovies } from "../Apis/getMovies.js";
+import { getMovies } from "../Apis/Movies/getMovies.js";
 export let getAllMovies = createAsyncThunk("movies/getMovies", getMovies);
 export let MovieSlice = createSlice({
   name: "movie",

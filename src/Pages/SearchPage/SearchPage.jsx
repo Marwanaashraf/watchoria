@@ -1,12 +1,12 @@
 import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import Loading from "../../Component/Loading/Loading.jsx";
-import ShowCard from "../../Component/ShowCard/ShowCard.jsx";
-import StaticImage from "../../Component/StaticImage/StaticImage.jsx";
-import { getSearch } from "../../Apis/getSearch.js";
-import NotFoundPage from "../../Component/NotFoundPage/NotFoundPage.jsx";
-import Pagination from "../../Component/Pagination/Pagination.jsx";
+import Loading from "../../Components/Loading/Loading.jsx";
+import ShowCard from "../../Components/ShowCard/ShowCard.jsx";
+import StaticImage from "../../Components/ui/StaticImage/StaticImage.jsx";
+import NotFoundPage from "../../Components/NotFoundPage/NotFoundPage.jsx";
+import Pagination from "../../Components/ui/Pagination/Pagination.jsx";
+import { getSearch } from "../../Apis/Search/getSearch.js";
 
 export default function SearchPage() {
   const { q } = useParams();

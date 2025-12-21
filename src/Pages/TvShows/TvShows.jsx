@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTvShows } from "../../Redux/SeriesSlice.js";
 import { useParams, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import Loading from "../../Component/Loading/Loading.jsx";
-import ShowCard from "../../Component/ShowCard/ShowCard.jsx";
-import Pagination from "../../Component/Pagination/Pagination.jsx";
-import NotFoundPage from "../../Component/NotFoundPage/NotFoundPage.jsx";
+import Loading from "../../Components/Loading/Loading.jsx";
+import ShowCard from "../../Components/ShowCard/ShowCard.jsx";
+import Pagination from "../../Components/ui/Pagination/Pagination.jsx";
+import NotFoundPage from "../../Components/NotFoundPage/NotFoundPage.jsx";
 
 export default function TvShows() {
   let [searchParams, setSearchParams] = useSearchParams();
@@ -53,6 +53,7 @@ export default function TvShows() {
               {type.split("_").join(" ")} TvShows
             </span>
           </h1>
+          <hr className="my-2.5" />
 
           {/* series */}
           <div className="my-5 grid grid-cols-2 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 gap-4">
