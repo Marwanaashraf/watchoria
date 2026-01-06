@@ -4,13 +4,13 @@ A full-featured movie and TV shows platform built using **TMDB APIs** and **Supa
 
 This project is designed as a **production-level application**, inspired by platforms like TMDB and IMDb, with additional user-centric features.
 
----
+
 
 ## 🚀 Live Demo
 
 🔗 https://watchoria.vercel.app
 
----
+
 
 ## 🛠️ Tech Stack
 
@@ -40,7 +40,7 @@ This project is designed as a **production-level application**, inspired by plat
 - Pagination & Search
 - Responsive Design
 
----
+
 
 ## ✨ Features
 
@@ -126,7 +126,7 @@ This project is designed as a **production-level application**, inspired by plat
 - Display user watchlist & ratings
 - Personalized user experience
 
----
+
 
 ## 🔐 Security & Authorization
 
@@ -134,7 +134,7 @@ This project is designed as a **production-level application**, inspired by plat
 - Each user can only access and modify their own data
 - Secure environment variables
 
----
+
 
 ## 🧠 Architecture Highlights
 
@@ -143,7 +143,6 @@ This project is designed as a **production-level application**, inspired by plat
 - Reusable UI components
 - Scalable folder structure
 
----
 
 ## 📈 Future Enhancements
 
@@ -154,7 +153,7 @@ This project is designed as a **production-level application**, inspired by plat
 - Custom recommendation system
 - Notifications system
 
----
+
 
 ## 🧪 Why This Project?
 
@@ -167,7 +166,6 @@ This project demonstrates:
 - Production-ready UI & UX practices
 - Theme management (Dark / Light mode)
 
----
 
 ## 🧑 Author
 
@@ -175,13 +173,6 @@ This project demonstrates:
 Frontend Developer  
 🔗 Portfolio: https://watchoria.vercel.app/ 
 🔗 GitHub: https://github.com/Marwanaashraf/watchoria.git
-
----
-
-## 📄 License
-
-This project is for educational and portfolio purposes.
-TMDB data is provided by TMDB APIs.
 
 
 ##  Setup & Installation
