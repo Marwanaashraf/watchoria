@@ -13,8 +13,7 @@ export const getTrending = async () => {
       ),
     ]);
     return [movieReq, tvReq];
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
     return null;
   }
 };

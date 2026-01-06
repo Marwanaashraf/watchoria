@@ -1,14 +1,21 @@
-import { BookmarkPlus, ChevronDown, LogOut } from "lucide-react";
-import React, { useState } from "react";
+import { ChevronDown, LogOut } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { setUserData } from "../../Redux/userSlice.js";
+import { getAvatar } from "../../Redux/avatarSlice.js";
+import clsx from "clsx";
 
 export default function Account() {
-  const { userData } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const disp = useDispatch();
+  const { userData } = useSelector((state) => state.user);
+  const { userAvatar, isLoading } = useSelector((state) => state.avatar);
   const [dropDown, setDropDown] = useState(false);
+  useEffect(() => {
+    disp(getAvatar(JSON.parse(localStorage.getItem("user_token"))?.accessToken));
+  }, []);
+  // token expired
   if (!userData) {
     return (
       <NavLink
@@ -19,48 +26,87 @@ export default function Account() {
       </NavLink>
     );
   }
+  let profileList = [
+    {
+      name: "Profile",
+      icon: <i className="fa-solid fa-user"></i>,
+      path: "/profile",
+    },
+    {
+      name: "WatchList",
+      icon: <i className="fa-solid fa-bookmark"></i>,
+      path: "/watchlist",
+    },
+    {
+      name: "Ratings",
+      icon: <i className="fa-solid fa-star"></i>,
+      path: "/ratings",
+    },
+    {
+      name: "Logout",
+      icon: <LogOut className="w-6 h-6" />,
+      path: "/auth/login",
+    },
+  ];
+
   return (
     <div className="relative">
-      {/*  */}
+      {/* logo */}
       <div className="flex items-center space-x-0">
         <div
           onClick={() => {
             dropDown ? setDropDown(false) : setDropDown(true);
           }}
-          className="size-9 rounded-full bg-secondry flex justify-center items-center cursor-pointer text-white"
+          style={
+            userAvatar !== ""
+              ? { backgroundImage: `url("${userAvatar}")` }
+              : undefined
+          }
+          className={clsx(
+            "size-9 rounded-full flex justify-center items-center cursor-pointer text-white",
+            isLoading
+              ? "animate-pulse dark:animate-pulse bg-slate-400  dark:bg-slate-600"
+              : userAvatar !== ""
+              ? "bg-cover bg-center"
+              : "bg-secondry"
+          )}
         >
-          <span className="font-bold uppercase text-xl">
-            {userData.userName?.slice(0, 1)}
-          </span>
+          {userAvatar === "" ? (
+            <span className="font-bold uppercase text-xl">
+              {userData.userName?.slice(0, 1)}
+            </span>
+          ) : (
+            ""
+          )}
         </div>
         <ChevronDown className="w-5 h-5" />
       </div>
+
       {/* dropdown */}
       {dropDown ? (
-        <div className="absolute top-11 -left-3  bg-slate-50 dark:bg-slate-800 p-2 w-36 h-32 rounded-lg z-10 shadow">
-          <div
-            onClick={() => {
-              setDropDown(false);
-              navigate("/watchlist");
-            }}
-            className="hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center space-x-1 text-xl font-semibold p-2 rounded-lg cursor-pointer my-1"
-          >
-            <BookmarkPlus className="w-6 h-6" />
-            <span>Watchlist</span>
-          </div>
-          <hr />
-          <div
-            onClick={() => {
-              setDropDown(false);
-              localStorage.removeItem("user_token");
-              disp(setUserData(null));
-              navigate("/auth/login");
-            }}
-            className="hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center space-x-1 text-xl font-semibold p-2 rounded-lg cursor-pointer my-3"
-          >
-            <LogOut className="w-6 h-6" />
-            <span>Logout</span>
-          </div>
+        <div className="absolute top-11 -left-2  bg-slate-50 dark:bg-slate-800 p-1.5 w-36 h-52 rounded-lg z-10 shadow">
+          {profileList.map((item, i) => {
+            return (
+              <>
+                <div
+                  onClick={() => {
+                    setDropDown(false);
+                    if (item.name === "Logout") {
+                      localStorage.removeItem("user_token");
+                      disp(setUserData(null));
+                      navigate(`${item.path}`);
+                    }
+                    navigate(`${item.path}`);
+                  }}
+                  className="hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center space-x-1 text-[17px] p-2 rounded-lg cursor-pointer my-1 text-slate-800 dark:text-white"
+                >
+                  {item.icon}
+                  <span>{item.name}</span>
+                </div>
+                {profileList.length - 1 === i ? "" : <hr />}
+              </>
+            );
+          })}
         </div>
       ) : (
         ""

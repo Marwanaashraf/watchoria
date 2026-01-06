@@ -1,16 +1,23 @@
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function RatingBtn({ ratingData, ratingLoading, setRating }) {
   const { userData } = useSelector((state) => state.user);
-
+  const navigate = useNavigate();
+  const handleRating = () => {
+    if (userData) {
+      setRating(true);
+    } else {
+      toast.error("Please login first");
+      navigate("/auth/login");
+    }
+  };
   return (
     <button
       disabled={ratingLoading}
-      onClick={() => {
-        userData ? setRating(true) : toast.error("Please login first");
-      }}
+      onClick={handleRating}
       className={clsx(
         "relative size-16 rounded-full p-[5px]  box-border cursor-pointer hover:scale-105 duration-300 disabled:cursor-not-allowed",
         !ratingData && ratingLoading

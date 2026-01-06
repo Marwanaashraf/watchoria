@@ -3,7 +3,7 @@ import { ApiKey, options } from "../options.js";
 
 export async function getTvShowData(tvShowId) {
   try {
-    let [tvShowReq, castReq, recomindReq, ageReq, streamReq] =
+    const [tvShowReq, castReq, recomindReq, ageReq, streamReq] =
       await Promise.all([
         axios.get(
           `https://api.themoviedb.org/3/tv/${tvShowId}?api_key=${ApiKey}&language=en-US`,
@@ -35,7 +35,6 @@ export async function getTvShowData(tvShowId) {
       streamList: streamReq.data.results.EG?.flatrate,
     };
   } catch (error) {
-    console.log(error);
-    return null;
+    throw error;
   }
 }

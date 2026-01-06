@@ -3,10 +3,11 @@ import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllMovies } from "../../Redux/MovieSlice.js";
 import { useParams, useSearchParams } from "react-router-dom";
-import Loading from "../../Components/Loading/Loading.jsx";
+
 import ShowCard from "../../Components/ShowCard/ShowCard.jsx";
 import Pagination from "../../Components/ui/Pagination/Pagination.jsx";
 import NotFoundPage from "../../Components/NotFoundPage/NotFoundPage.jsx";
+import Loading from "../../Components/ui/Loading/Loading.jsx";
 export default function Movies() {
   let { type } = useParams();
   const disp = useDispatch();
@@ -38,6 +39,7 @@ export default function Movies() {
   if (movieList.length === 0 && !loading) {
     return <NotFoundPage />;
   }
+  console.log(movieList);
 
   return (
     <>
@@ -51,12 +53,12 @@ export default function Movies() {
       ) : (
         <section className="contain py-28">
           {/* Header */}
-          <h1 className="text-3xl">
-            <i className="fa-solid fa-video text-main"></i>{" "}
-            <span className="capitalize  font-bold ">
+          <div className="flex gap-2 items-center">
+            <span className="before-head"></span>
+            <h1 className="text-3xl capitalize  font-bold">
               {type.split("_").join(" ")} Movies
-            </span>
-          </h1>
+            </h1>
+          </div>
           <hr className="my-2.5" />
           {/* Movies */}
           <div className="my-5 grid grid-cols-2 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 gap-4">

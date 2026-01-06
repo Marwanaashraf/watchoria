@@ -2,10 +2,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { options } from "../../Apis/options.js";
 import { useParams } from "react-router-dom";
-import Loading from "../../Components/Loading/Loading.jsx";
-import ActingProfile from "../../Components/ActingProfile/ActingProfile.jsx";
 import clsx from "clsx";
 import NotFoundPage from "../../Components/NotFoundPage/NotFoundPage.jsx";
+import ActingProfile from "./Components/ActingProfile.jsx";
+import Loading from "../../Components/ui/Loading/Loading.jsx";
 
 export default function ActorProfile() {
   const { id } = useParams();

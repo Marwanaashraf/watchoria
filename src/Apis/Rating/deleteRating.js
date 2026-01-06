@@ -20,7 +20,7 @@ export const deleteRating = async (showId) => {
     });
     return res;
   } catch (error) {
-    console.log(error);
-    return null;
+       return null;
+
   }
 };

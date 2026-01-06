@@ -13,11 +13,15 @@ let UserSlice = createSlice({
         state.userData = null;
         return;
       }
+
       if (diffMin > 0) {
         const token_decode = jwtDecode(token.accessToken);
+
         state.userData = {
+          id: token_decode?.user_metadata?.sub,
           email: token_decode?.email,
           userName: token_decode?.user_metadata?.userName,
+          avatar: token_decode?.user_metadata?.avatar_url,
         };
       } else {
         localStorage.removeItem("user_token");

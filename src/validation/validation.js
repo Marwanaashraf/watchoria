@@ -27,3 +27,9 @@ export const loginSchema = Yup.object({
       "Password must contain letters, numbers, and special characters"
     ),
 });
+export const editProfileSchema = Yup.object({
+  email: Yup.string().required("Email is required").email("enter valid email"),
+  userName: Yup.string()
+    .required("Name is required")
+    .min(3, "Minlength is 3 characters"),
+});

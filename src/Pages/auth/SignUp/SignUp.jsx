@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { setUserData } from "../../../Redux/userSlice.js";
 import { useDispatch } from "react-redux";
 import { Helmet } from "react-helmet";
+import { setUserAvatar } from "../../../Redux/avatarSlice.js";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export default function SignUp() {
       email: values.email,
       password: values.password,
       options: {
-        data: { userName: values.userName },
+        data: { userName: values.userName, avatar_url: "" },
       },
     });
     setLoading(false);
@@ -43,10 +44,20 @@ export default function SignUp() {
           userName: data.user.user_metadata.userName,
         })
       );
-      toast.success("user created successfully");
+      disp(setUserAvatar(""));
+
+      toast.success(`Hello ${data.user.user_metadata.userName}`, {
+        icon: "🎉",
+        style: {
+          fontSize: "18px",
+
+          backgroundColor: "#333",
+          color: "white",
+        },
+      });
       navigate("/");
     }
-    console.log(data.session.access_token);
+    console.log(data.user.user_metadata.userName);
   };
   const formik = useFormik({
     initialValues: {
@@ -241,7 +252,7 @@ export default function SignUp() {
           </button>
           <p className="text-center ">
             Already have an account?{" "}
-            <Link className="text-main hover:underline" to="/auth/login">
+            <Link className="text-secondry hover:underline" to="/auth/login">
               Login
             </Link>{" "}
           </p>

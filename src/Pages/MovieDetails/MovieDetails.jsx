@@ -3,13 +3,13 @@ import { Helmet } from "react-helmet";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getMovie } from "../../Redux/MovieDetails.js";
-import Loading from "../../Components/Loading/Loading.jsx";
 import NotFoundPage from "../../Components/NotFoundPage/NotFoundPage.jsx";
 import { getWatchList } from "../../Redux/WatchlistSlice.js";
 import Rating from "../../Components/Rating/Rating.jsx";
 import ShowDetails from "../../Components/ShowDetails/ShowDetails.jsx";
 import { getRatingData } from "../../Apis/Rating/getRating.js";
 import ShowNavs from "../../Components/ShowNavs/ShowNavs.jsx";
+import Loading from "../../Components/ui/Loading/Loading.jsx";
 
 export default function MovieDetails() {
   let disp = useDispatch();
@@ -70,7 +70,6 @@ export default function MovieDetails() {
       <section>
         <div className="contain py-28">
           {/* movie Details */}
-
           <ShowDetails
             show={movie}
             type="movie"

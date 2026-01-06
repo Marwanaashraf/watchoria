@@ -6,7 +6,6 @@ import SearchByName from "../../../Components/SearchByName/SearchByName.jsx";
 import clsx from "clsx";
 import Account from "../../../Components/Account/Account.jsx";
 import { movieLinks, showsLinks } from "../../../Constants/index.js";
-
 export default function Navbar() {
   const navigate = useNavigate();
   const barsRef = useRef(undefined);
@@ -51,7 +50,7 @@ export default function Navbar() {
           {/* logo, links */}
           <div className="flex space-x-6 items-center">
             {/* logo */}
-            <div className="logo text-red-600 uppercase font-bold cursor-pointer flex space-x-2 items-center">
+            <div className="logo text-main uppercase font-bold cursor-pointer flex space-x-2 items-center">
               <img className="w-10" src={logo} alt="" />
               <NavLink to="/" className="text-2xl font-sans ">
                 Watchoria

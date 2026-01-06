@@ -30,7 +30,8 @@ export const editRating = async (showId, rating, userId) => {
 
     return data?.[0] || null;
   } catch (error) {
-    console.log(error);
-    return null;
+      return null;
+
+
   }
 };

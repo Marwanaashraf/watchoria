@@ -12,6 +12,7 @@ export default function Rating({
   setRating,
   ratingData,
   setRatingData,
+  setRemoveId,
 }) {
   // change rate
   const [rate, setRate] = useState(ratingData?.rating_vote || 0);
@@ -21,14 +22,20 @@ export default function Rating({
   const [addLoading, setAddLoading] = useState();
   // remove loading
   const [deleteLoading, setDeleteLoading] = useState();
-
+  const body = {
+    type,
+    rating_vote: rate,
+    show_id: show?.id,
+    show_rating: show?.vote_average,
+    title: type === "movie" ? show?.title : show?.name,
+    poster_path: show?.poster_path,
+    runtime: type === "movie" ? show?.runtime : 0,
+    release_date: type === "movie" ? show?.release_date : show?.first_air_date,
+    number_of_seasons: type === "movie" ? 0 : show?.number_of_seasons,
+    number_of_episodes: type === "movie" ? 0 : show?.number_of_episodes,
+  };
   // add and upadate rating
   const handleRate = async () => {
-    const body = {
-      show_id: show.id,
-      rating_vote: rate,
-      type,
-    };
     if (!ratingData) {
       setAddLoading(true);
       const res = await addRating(body);
@@ -41,7 +48,11 @@ export default function Rating({
       }
     } else {
       setAddLoading(true);
-      const res = await editRating(show.id, rate, ratingData.user_id);
+      const res = await editRating(
+        ratingData.show_id,
+        rate,
+        ratingData.user_id
+      );
       setAddLoading(false);
       if (res) {
         setRatingData(res);
@@ -54,13 +65,14 @@ export default function Rating({
   // delete rating
   const deleteRate = async () => {
     setDeleteLoading(true);
-    const res = await deleteRating(show.id);
+    const res = await deleteRating(ratingData.show_id);
     setDeleteLoading(false);
     if (!res) {
       toast.error("Something wrong please try again");
     } else {
       // rate in prompt
       setRate(0);
+      if (setRemoveId) setRemoveId(ratingData.id);
       // rating data
       setRatingData(null);
       // close prompt
@@ -79,6 +91,7 @@ export default function Rating({
       if (!rateRef.current?.contains(e.target)) setRating(false);
     });
   }, []);
+  console.log(ratingData);
 
   return (
     <section
@@ -103,7 +116,11 @@ export default function Rating({
           Rate this
         </h3>
         <h3 className="text-center sm:text-2xl text-xl font-semibold my-2">
-          {type === "movie" ? show?.title : show?.name}
+          {ratingData
+            ? ratingData.title
+            : type === "movie"
+            ? show.title
+            : show.name}
         </h3>
 
         {/* rating values */}

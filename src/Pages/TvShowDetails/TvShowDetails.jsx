@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import { getTvShow } from "../../Redux/TvShowDetails.js";
-import Loading from "../../Components/Loading/Loading.jsx";
+import Loading from "../../Components/ui/Loading/Loading.jsx";
+
 import NotFoundPage from "../../Components/NotFoundPage/NotFoundPage.jsx";
 import ShowDetails from "../../Components/ShowDetails/ShowDetails.jsx";
 import Rating from "../../Components/Rating/Rating.jsx";
@@ -42,7 +43,7 @@ export default function TvShowDetails() {
   if (loading) {
     return <Loading />;
   }
-  console.log(ageRating);
+  console.log(tvShow);
 
   return (
     <>
@@ -56,7 +57,7 @@ export default function TvShowDetails() {
         <ShowDetails
           show={tvShow}
           setRating={setRating}
-          type="tv-series"
+          type="tv"
           ratingData={ratingData}
           ratingLoading={ratingLoading}
           ageRating={ageRating.rating}
@@ -76,7 +77,7 @@ export default function TvShowDetails() {
         <Rating
           show={tvShow}
           setRating={setRating}
-          type="tv-show"
+          type="tv"
           ratingData={ratingData}
           setRatingData={setRatingData}
         />

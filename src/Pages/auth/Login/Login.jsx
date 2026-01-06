@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUserData } from "../../../Redux/userSlice.js";
 import { Helmet } from "react-helmet";
+import { setUserAvatar } from "../../../Redux/avatarSlice.js";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -37,7 +38,15 @@ export default function Login() {
           userName: data.user.user_metadata.userName,
         })
       );
-      toast.success("login successfully");
+      disp(setUserAvatar(data.user.user_metadata?.avatar_url));
+      toast.success(`Hello ${data.user.user_metadata.userName}`, {
+        icon: "🎉",
+        style: {
+          fontSize: "18px",
+          background: "#333",
+          color: "white",
+        },
+      });
       navigate("/");
     }
   };
@@ -149,7 +158,7 @@ export default function Login() {
           </button>
           <p className="text-center ">
             Don’t have an account?{" "}
-            <Link className="text-main hover:underline" to="/auth/signup">
+            <Link className="text-secondry hover:underline" to="/auth/signup">
               Sign up
             </Link>{" "}
           </p>

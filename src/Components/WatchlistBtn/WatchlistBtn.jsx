@@ -4,11 +4,13 @@ import { deleteWatchList } from "../../Apis/WatchList/deleteWatchList.js";
 import { useState } from "react";
 import { BookmarkCheck, BookmarkPlus, Loader } from "lucide-react";
 import toast from "react-hot-toast";
-import { getWatchList, setInWatchList } from "../../Redux/WatchlistSlice.js";
-import ToolTipComponent from "../ToolTip/ToolTip.jsx";
+import { setInWatchList } from "../../Redux/WatchlistSlice.js";
+import ToolTipComponent from "../ui/ToolTip/ToolTip.jsx";
+import { useNavigate } from "react-router-dom";
 
 export default function WatchlistBtn({ type, show }) {
   const disp = useDispatch();
+  const navigate = useNavigate();
   // getWatchList
   const { watchList, watchListLoading } = useSelector(
     (state) => state.watchList
@@ -36,6 +38,7 @@ export default function WatchlistBtn({ type, show }) {
     // user not logged
     if (!userData) {
       toast.error("Please login first");
+      navigate("/auth/login");
       return;
     }
 

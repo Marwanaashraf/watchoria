@@ -22,7 +22,6 @@ export const getRatingData = async (showId) => {
     });
     return data[0];
   } catch (error) {
-    console.log(error);
     return null;
   }
 };

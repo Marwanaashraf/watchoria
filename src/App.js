@@ -18,6 +18,9 @@ import { Toaster } from "react-hot-toast";
 import * as Tooltip from "@radix-ui/react-tooltip";
 import Watchlist from "./Pages/Watchlist/Watchlist.jsx";
 import Layout from "./Components/Layout/Layout.jsx";
+import Ratings from "./Pages/Ratings/Ratings.jsx";
+import Profile from "./Pages/Profile/Profile.jsx";
+import GuardRouting from "./Components/GuardRouting/GuardRouting.jsx";
 export default function App() {
   let routes = createBrowserRouter([
     {
@@ -36,7 +39,30 @@ export default function App() {
         { path: "search/:q", element: <SearchPage /> },
         { path: "auth/signup", element: <SignUp /> },
         { path: "auth/login", element: <Login /> },
-        { path: "watchlist", element: <Watchlist /> },
+        {
+          path: "watchlist",
+          element: (
+            <GuardRouting>
+              <Watchlist />
+            </GuardRouting>
+          ),
+        },
+        {
+          path: "profile",
+          element: (
+            <GuardRouting>
+              <Profile />
+            </GuardRouting>
+          ),
+        },
+        {
+          path: "ratings",
+          element: (
+            <GuardRouting>
+              <Ratings />
+            </GuardRouting>
+          ),
+        },
         { path: "*", element: <NotFound /> },
       ],
     },

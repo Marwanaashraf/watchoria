@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getWatchList } from "../../Redux/WatchlistSlice.js";
-import Loading from "../../Components/Loading/Loading.jsx";
+import Loading from "../../Components/ui/Loading/Loading.jsx";
 import { ChevronDown, Search, SearchIcon, User, X } from "lucide-react";
 import noData from "../../assets/images/activities.svg";
 import { Helmet } from "react-helmet";
-import WatchlistCard from "../../Components/WatchlistCard/WatchlistCard.jsx";
+
 import clsx from "clsx";
+import WatchlistCard from "./Components/WatchlistCard.jsx";
 export default function Watchlist() {
   const disp = useDispatch();
   const { userData } = useSelector((state) => state.user);

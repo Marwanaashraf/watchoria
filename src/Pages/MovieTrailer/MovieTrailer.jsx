@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import Loading from "../../Components/Loading/Loading.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { getMovie } from "../../Redux/MovieDetails.js";
 import { getTrailer } from "../../Apis/Movies/getTrailer.js";
 import { Film } from "lucide-react";
 import NotData from "../../Components/NotData/NotData.jsx";
+import Loading from "../../Components/ui/Loading/Loading.jsx";
 
 export default function MovieTrailer() {
   const { id } = useParams();

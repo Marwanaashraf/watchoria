@@ -1,26 +1,25 @@
 import axios from "axios";
 import { supabaseKey, supabaseUrl } from "../../supabaseClient.js";
 
-export const addRating = async (show) => {
+export const getAllRatings = async () => {
   try {
     const user = JSON.parse(localStorage.getItem("user_token"));
     if (!user) {
       return null;
     }
     const token = user.accessToken;
-    const {data} = await axios.post(`${supabaseUrl}/rest/v1/rating`, show, {
+    const { data } = await axios.get(`${supabaseUrl}/rest/v1/rating`, {
       headers: {
-        Accept: "application/json",
         apikey: supabaseKey,
+        Accept: "application/json",
         Authorization: `Bearer ${token}`,
-        Prefer: "return=representation",
-        "Content-Type": "application/json",
-      }
+      },
+      params: {
+        select: "*",
+      },
     });
-    return data?.[0] || null
+    return data;
   } catch (error) {
-            return null;
-
-
+    throw error;
   }
 };

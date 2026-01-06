@@ -1,7 +1,7 @@
 import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import Loading from "../../Components/Loading/Loading.jsx";
+import Loading from "../../Components/ui/Loading/Loading.jsx";
 import ShowCard from "../../Components/ShowCard/ShowCard.jsx";
 import StaticImage from "../../Components/ui/StaticImage/StaticImage.jsx";
 import NotFoundPage from "../../Components/NotFoundPage/NotFoundPage.jsx";

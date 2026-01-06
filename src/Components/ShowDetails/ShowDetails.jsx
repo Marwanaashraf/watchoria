@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import WatchlistBtn from "../WatchlistBtn/WatchlistBtn.jsx";
 import { useSelector } from "react-redux";
-import ToolTipComponent from "../ToolTip/ToolTip.jsx";
-import RatingBtn from "../RatingBtn/RatingBtn.jsx";
+import RatingBtn from "../ui/RatingBtn/RatingBtn.jsx";
+import ToolTipComponent from "../ui/ToolTip/ToolTip.jsx";
 
 export default function ShowDetails({
   show,

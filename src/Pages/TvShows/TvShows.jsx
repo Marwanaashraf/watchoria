@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTvShows } from "../../Redux/SeriesSlice.js";
 import { useParams, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import Loading from "../../Components/Loading/Loading.jsx";
+import Loading from "../../Components/ui/Loading/Loading.jsx";
 import ShowCard from "../../Components/ShowCard/ShowCard.jsx";
 import Pagination from "../../Components/ui/Pagination/Pagination.jsx";
 import NotFoundPage from "../../Components/NotFoundPage/NotFoundPage.jsx";
@@ -47,12 +47,12 @@ export default function TvShows() {
       ) : (
         <section className="contain py-28">
           {/*Header*/}
-          <h1 className="text-3xl">
-            <i className="fa-solid fa-tv text-main"></i>{" "}
-            <span className="capitalize  font-bold">
-              {type.split("_").join(" ")} TvShows
-            </span>
-          </h1>
+          <div className="flex gap-2 items-center">
+            <span className="before-head"></span>
+            <h1 className="text-3xl capitalize  font-bold">
+              {type.split("_").join(" ")} Series
+            </h1>
+          </div>
           <hr className="my-2.5" />
 
           {/* series */}

@@ -10,6 +10,6 @@ export const getTrailer = async (movieId) => {
       (ele) => ele.type === "Trailer" && ele.site === "YouTube"
     );
   } catch (error) {
-    console.error(error);
+    return null;
   }
 };

@@ -2,9 +2,11 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import defaultImage from "../../assets/images/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg";
-import Loading from "../../Components/Loading/Loading.jsx";
+
 import { useDispatch, useSelector } from "react-redux";
 import { getTvShow } from "../../Redux/TvShowDetails.js";
+import Loading from "../../Components/ui/Loading/Loading.jsx";
+
 import clsx from "clsx";
 export default function TvShowSeasons() {
   //tvshow id
@@ -82,11 +84,16 @@ export default function TvShowSeasons() {
 
           <div className="my-8">
             {/* num of seasons */}
-            <h1 className="text-3xl font-bold">
-              Seasons (
-              <span className="text-secondry">{tvShow?.number_of_seasons}</span>
-              )
-            </h1>
+            <div className="flex gap-2 items-center">
+              <span className="before-head"></span>
+              <h1 className="text-3xl font-bold">
+                Seasons (
+                <span className="text-secondry">
+                  {tvShow?.number_of_seasons}
+                </span>
+                )
+              </h1>
+            </div>
 
             {/* Seasons */}
             <div className="grid grid-cols-1 gap-4 my-8 space-y-2">

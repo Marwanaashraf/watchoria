@@ -1,3 +1,4 @@
+import { AvatarReducer } from "./avatarSlice.js";
 import { movieDetailsReducer } from "./MovieDetails.js";
 import { movieReducer } from "./MovieSlice.js";
 import { RatingReducer } from "./RatingSlice.js";
@@ -16,6 +17,7 @@ export const ConfigStore = configureStore({
     tvShow: tvShowDetailsReducer,
     user: UserReducer,
     watchList: WatchlistReducer,
-    rating: RatingReducer,
+    ratings: RatingReducer,
+    avatar: AvatarReducer,
   },
 });

@@ -17,7 +17,8 @@ export default function Cast({ cast }) {
         }}
         breakpoints={{
           360: { slidesPerView: 2 },
-          640: { slidesPerView: 4 },
+          768: { slidesPerView: 3 },
+          956: { slidesPerView: 4 },
           1024: { slidesPerView: 5 },
           1280: { slidesPerView: 6 },
         }}

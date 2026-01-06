@@ -2,28 +2,36 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import defaultImage from "../../assets/images/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg";
 import { Helmet } from "react-helmet";
-import Loading from "../../Components/Loading/Loading.jsx";
+import Loading from "../../Components/ui/Loading/Loading.jsx";
+
 import { getEpisodesData } from "../../Apis/Series/getEpisodes.js";
 import clsx from "clsx";
+import NotFoundPage from "../../Components/NotFoundPage/NotFoundPage.jsx";
 export default function SpecificSeason() {
   const { id, season } = useParams();
   const navigate = useNavigate();
   //season data
-  const [seasonData, setSeason] = useState({});
+  const [seasonData, setSeason] = useState(null);
   const [isLoading, setLoading] = useState(true);
   async function getEpisodes() {
     setLoading(true);
     let data = await getEpisodesData(id, season);
+    setLoading(false);
     if (data) {
-      setLoading(false);
       setSeason(data);
+    } else {
+      setSeason(null);
     }
   }
   useEffect(() => {
     getEpisodes();
   }, [id, season]);
+  console.log(seasonData);
   if (isLoading) {
     return <Loading />;
+  }
+  if (!seasonData) {
+    return <NotFoundPage />;
   }
   return (
     <>
@@ -53,10 +61,17 @@ export default function SpecificSeason() {
             />
           )}
 
-          <div className="flex flex-col space-y-3">
+          <div className="flex flex-col space-y-2">
             <h3 className="text-xl md:text-2xl font-bold line-clamp-2">
-              {seasonData?.name}({seasonData?.air_date?.split("-")[0]})
+              {seasonData?.name}
             </h3>
+            <div className="flex gap-1 text-lg">
+              <span>
+                <i className="fa-solid fa-star text-yellow-500"></i>{" "}
+                {seasonData?.vote_average} |
+              </span>
+              <span>{seasonData?.air_date?.split("-")[0]}</span>
+            </div>
             <span
               onClick={() => {
                 navigate(`/tv-show/${id}/seasons`);
@@ -68,11 +83,16 @@ export default function SpecificSeason() {
           </div>
         </div>
         <div className="my-8">
-          <h3 className="text-4xl font-bold">
-            Episodes (
-            <span className="text-secondry">{seasonData?.episodes.length}</span>
-            )
-          </h3>
+          <div className="flex gap-2 items-center">
+            <span className="before-head"></span>
+            <h3 className="text-4xl font-bold">
+              Episodes (
+              <span className="text-secondry">
+                {seasonData?.episodes.length}
+              </span>
+              )
+            </h3>
+          </div>
           <div className="grid grid-cols-1 gap-4 my-8 space-y-5">
             {seasonData?.episodes?.map((ele, i) => {
               return (

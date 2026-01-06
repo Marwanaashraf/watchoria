@@ -4,14 +4,14 @@ import { getAllMovies } from "../../Redux/MovieSlice.js";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { getTvShows } from "../../Redux/SeriesSlice.js";
-import Loading from "../../Components/Loading/Loading.jsx";
 import { Swiper } from "swiper/react";
 import { SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import NavBtn from "../../Components/ui/NavBtn/NavBtn.jsx";
-import Trending from "../../Components/Trending/Trending.jsx";
 import ShowCard from "../../Components/ShowCard/ShowCard.jsx";
 import { getTrending } from "../../Apis/Trending/getTrendingData.js";
+import Trending from "./Components/Trending.jsx";
+import Loading from "../../Components/ui/Loading/Loading.jsx";
 export default function Home() {
   const disp = useDispatch();
   const { movieList } = useSelector((d) => d.movies);
@@ -75,7 +75,7 @@ export default function Home() {
                       className="layer h-full flex items-center"
                     >
                       <div className="space-y-3 w-3/4 md:w-1/2 ms-20">
-                        <h1 className="text-5xl uppercase text-main font-bold text-shadow">
+                        <h1 className="text-3xl md:text-5xl uppercase text-main font-bold text-shadow">
                           {movie.title}
                         </h1>
                         <p className="text-lg text-white">
@@ -107,10 +107,13 @@ export default function Home() {
         </Swiper>
 
         {/* New Releases series */}
-        <div className="contain py-10">
+        <div className="w-[90%] md:w-[95%] mx-auto py-10">
           {/* header */}
           <div className="flex justify-between items-center">
-            <h3 className="font-bold text-3xl ">New Releases</h3>
+            <div className="flex gap-2 items-center">
+              <span className="before-head"></span>
+              <h3 className="font-bold text-3xl ">New Releases</h3>
+            </div>
             <p
               onClick={() => {
                 navigate(`/tv-shows/airing_today`);
@@ -160,8 +163,11 @@ export default function Home() {
         </div>
 
         {/* Trending Movies */}
-        <div className="contain py-10">
-          <h3 className="font-bold text-3xl ">Trending Movies</h3>
+        <div className="w-[90%] md:w-[95%] mx-auto py-10">
+          <div className="flex gap-2 items-center">
+            <span className="before-head"></span>
+            <h3 className="font-bold text-3xl ">Trending Movies</h3>
+          </div>
           <hr className="my-2.5" />
 
           <div className="relative my-5 w-[90%] md:w-[95%]  mx-auto">
@@ -170,8 +176,11 @@ export default function Home() {
         </div>
 
         {/* Trending TvShows */}
-        <div className="contain py-10">
-          <h3 className="font-bold text-3xl ">Trending Tv-Shows</h3>
+        <div className="w-[90%] md:w-[95%] mx-auto py-10">
+          <div className="flex gap-2 items-center">
+            <span className="before-head"></span>
+            <h3 className="font-bold text-3xl ">Trending Tv-Shows</h3>
+          </div>
           <hr className="my-2.5" />
 
           <div className="relative my-5 w-[90%] md:w-[95%]  mx-auto">

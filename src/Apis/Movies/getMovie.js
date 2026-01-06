@@ -1,5 +1,6 @@
 import axios from "axios";
 import { ApiKey, options } from "../options.js";
+import { isRejectedWithValue } from "@reduxjs/toolkit";
 
 export async function getMovieData(movieId) {
   try {
@@ -32,11 +33,11 @@ export async function getMovieData(movieId) {
       recomindations: recomendationReq.data.results
         .filter((ele) => ele.vote_average !== 0 && ele.poster_path)
         .slice(0, 15),
-      ageRating: ageReq.data.results.find((ele) => ele.iso_3166_1 === "US")?.release_dates[0],
+      ageRating: ageReq.data.results.find((ele) => ele.iso_3166_1 === "US")
+        ?.release_dates[0],
       streamList: streamReq.data.results.EG?.flatrate,
     };
-  } catch (err) {
-    console.log(err);
-    return null;
+  } catch (error) {
+    throw error;
   }
 }

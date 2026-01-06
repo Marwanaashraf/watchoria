@@ -20,8 +20,6 @@ export const addWatchList = async (body) => {
 
     return res;
   } catch (error) {
-    console.error(error);
-
-    return null;
+   return null
   }
 };

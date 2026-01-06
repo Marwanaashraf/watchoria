@@ -2,7 +2,7 @@ import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { useNavigate } from "react-router-dom";
-import NavBtn from "../ui/NavBtn/NavBtn.jsx";
+import NavBtn from "../../../Components/ui/NavBtn/NavBtn.jsx";
 
 
 export default function Trending({ trending, type }) {

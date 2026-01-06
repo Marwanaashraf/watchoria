@@ -1,10 +1,11 @@
 import toast from "react-hot-toast";
-import { deleteWatchList } from "../../Apis/WatchList/deleteWatchList.js";
-import { setInWatchList } from "../../Redux/WatchlistSlice.js";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { CircleAlert, Trash2 } from "lucide-react";
+import { deleteWatchList } from "../../../Apis/WatchList/deleteWatchList.js";
+import { setInWatchList } from "../../../Redux/WatchlistSlice.js";
 
 export default function WatchlistCard({
   displayedList,

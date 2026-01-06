@@ -14,23 +14,24 @@ export let tvShowSlice = createSlice({
     cast: [],
     recomindations: [],
     ageRating: {},
-    streamList:[]
+    streamList: [],
   },
   extraReducers: (builder) => {
     builder.addCase(getTvShow.pending, (state, action) => {
       state.loading = true;
     });
     builder.addCase(getTvShow.fulfilled, (state, action) => {
-      const payload = action.payload;
-      state.tvShow = payload.tvShow || {};
-      state.cast = payload.cast || [];
-      state.recomindations = payload.recomindations || [];
-      state.streamList = payload.streamList || [];
-      state.ageRating = payload.ageRating || {};
+      const payload = action.payload || {};
+
+      state.tvShow = payload.tvShow ?? {};
+      state.cast = payload.cast ?? [];
+      state.recomindations = payload.recomindations ?? [];
+      state.streamList = payload.streamList ?? [];
+      state.ageRating = payload.ageRating ?? {};
       state.loading = false;
     });
     builder.addCase(getTvShow.rejected, (state, action) => {
-      state.loading = true;
+      state.loading = false;
     });
   },
 });

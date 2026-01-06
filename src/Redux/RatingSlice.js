@@ -1,26 +1,28 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getRatingData } from "../Apis/Rating/getRating.js";
-export const getRating = createAsyncThunk("rating/getRating", getRatingData);
+import { getAllRatings } from "../Apis/Rating/getAllRating.js";
+export const getRatings = createAsyncThunk("rating/getRating", getAllRatings);
 const RatingSlice = createSlice({
-  name: "rating",
-  initialState: { ratingData: {}, ratingLoading: true },
+  name: "ratings",
+  initialState: { ratingList: [], ratingLoading: true },
   reducers: {
-    setRatingData: (state, action) => {
-      state.ratingData = action.payload;
+    setRatingList: (state, action) => {
+      state.ratingList = action.payload;
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getRating.pending, (state, action) => {
+    builder.addCase(getRatings.pending, (state, action) => {
+      state.ratingData = null;
       state.ratingLoading = true;
     });
-    builder.addCase(getRating.fulfilled, (state, action) => {
-      state.ratingData = action.payload;
+    builder.addCase(getRatings.fulfilled, (state, action) => {
+      state.ratingList = action.payload;
       state.ratingLoading = false;
     });
-    builder.addCase(getRating.rejected, (state, action) => {
+    builder.addCase(getRatings.rejected, (state, action) => {
+      state.ratingData = null;
       state.ratingLoading = false;
     });
   },
 });
 export const RatingReducer = RatingSlice.reducer;
-export const { setRatingData } = RatingSlice.actions;
+export const { setRatingList } = RatingSlice.actions;

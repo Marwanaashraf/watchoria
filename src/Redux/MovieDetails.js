@@ -19,16 +19,16 @@ export let MovieSlice = createSlice({
     });
     builder.addCase(getMovie.fulfilled, (state, action) => {
       const payload = action.payload || {};
-      state.movie = payload.movie || {};
-      state.cast = payload.cast || [];
-      state.ageRating = payload.ageRating || {};
-      state.recomindations = payload.recomindations || [];
-      state.director = payload.director || {};
-      state.streamList = payload.streamList || [];
+      state.movie = payload.movie ?? {};
+      state.cast = payload.cast ?? [];
+      state.ageRating = payload.ageRating ?? {};
+      state.recomindations = payload.recomindations ?? [];
+      state.director = payload.director ?? {};
+      state.streamList = payload.streamList ?? [];
       state.loading = false;
     });
     builder.addCase(getMovie.rejected, (state, action) => {
-      state.loading = true;
+      state.loading = false;
     });
   },
 });
