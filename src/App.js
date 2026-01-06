@@ -21,6 +21,7 @@ import Layout from "./Components/Layout/Layout.jsx";
 import Ratings from "./Pages/Ratings/Ratings.jsx";
 import Profile from "./Pages/Profile/Profile.jsx";
 import GuardRouting from "./Components/GuardRouting/GuardRouting.jsx";
+import TvShowTrailer from "./Pages/TvShowTrailer/TvShowTrailer.jsx";
 export default function App() {
   let routes = createBrowserRouter([
     {
@@ -35,6 +36,7 @@ export default function App() {
         { path: "tv-show/:id", element: <TvShowDetails /> },
         { path: "tv-show/:id/seasons", element: <TvShowSeasons /> },
         { path: "tv-show/:id/seasons/:season", element: <SpecificSeason /> },
+        { path: "tv-show/:id/trailer", element: <TvShowTrailer /> },
         { path: "cast/:id", element: <ActorProfile /> },
         { path: "search/:q", element: <SearchPage /> },
         { path: "auth/signup", element: <SignUp /> },

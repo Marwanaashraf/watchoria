@@ -61,7 +61,7 @@ export default function WatchlistCard({
           {/* details */}
           <div>
             {/* title */}
-            <h3 className="text-base md:text-2xl font-bold">
+            <h3 className="text-lg md:text-2xl font-bold">
               {index + 1}- {show.title}
             </h3>
 
@@ -117,8 +117,8 @@ export default function WatchlistCard({
                 ) : (
                   <Trash2 className="w-3 h-3 md:w-5 md:h-5 inline" />
                 )}
-                <span className="text-[10px] md:text-base font-medium">
-                  Remove from watchlist
+                <span className="text-base font-medium">
+                  Remove 
                 </span>
               </div>
             </div>

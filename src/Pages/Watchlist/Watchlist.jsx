@@ -252,9 +252,9 @@ export default function Watchlist() {
               })}
             </div>
           ) : (
-            <div className="flex flex-col justify-center items-center p-16 text-gray-500 dark:text-gray-400  text-lg gap-1.5">
+            <div className="flex flex-col justify-center items-center p-16 text-gray-500 dark:text-gray-400 text-base md:text-lg gap-1.5">
               <img className="w-36" src={noData} alt="no data" />
-              <p>Watchlist is empty</p>
+              <h3 className="text-lg md:text-2xl">Watchlist is empty</h3>
               <p>
                 {userData
                   ? "No results found for movies or TV shows. "

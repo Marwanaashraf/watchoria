@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import WatchlistBtn from "../WatchlistBtn/WatchlistBtn.jsx";
 import { useSelector } from "react-redux";
 import RatingBtn from "../ui/RatingBtn/RatingBtn.jsx";
@@ -147,15 +147,25 @@ export default function ShowDetails({
                 onClick={() => {
                   type === "movie"
                     ? navigate(`/movie/${show.id}/trailer`)
-                    : navigate(`/tv-show/${show.id}/seasons`);
+                    : navigate(`/tv-show/${show.id}/trailer`);
                 }}
                 className="btn-trigger"
               >
                 <i className="fa-solid fa-play"></i>
               </button>
             }
-            content={type === "movie" ? "Play Trailer" : "View Seasons"}
+            content="Play Trailer"
           />
+          {type === "tv" ? (
+            <Link
+              className="hover:underline hover:opacity-50 text-lg"
+              to={`/tv-show/${show.id}/seasons`}
+            >
+              <i className="fa-solid fa-arrow-right"></i> View Seasons
+            </Link>
+          ) : (
+            ""
+          )}
         </div>
 
         {/* Description */}

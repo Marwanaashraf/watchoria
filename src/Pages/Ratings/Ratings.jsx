@@ -99,7 +99,7 @@ export default function Ratings() {
                                 ? navigate(`/movie/${item.show_id}`)
                                 : navigate(`/tv-show/${item.show_id}`);
                             }}
-                            className="text-base md:text-2xl font-bold cursor-pointer hover:opacity-60  duration-500"
+                            className="text-lg md:text-2xl font-bold cursor-pointer hover:opacity-60  duration-500"
                           >
                             {i + 1}- {item.title}
                           </h3>
