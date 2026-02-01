@@ -95,7 +95,7 @@ a:hover {
   @apply w-2;
 }
 ::-webkit-scrollbar-track {
-  @apply bg-slate-300 dark:bg-slate-100 shadow-lg;
+  @apply bg-slate-300 dark:bg-slate-700 shadow-lg;
 }
 ::-webkit-scrollbar-thumb {
   @apply bg-main  rounded-lg hover:bg-main/80 cursor-pointer;

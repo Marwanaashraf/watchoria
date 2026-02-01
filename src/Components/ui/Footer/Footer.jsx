@@ -5,6 +5,7 @@ import { changeMoviePage, getAllMovies } from "../../../Redux/MovieSlice.js";
 import { changeTvPage, getTvShows } from "../../../Redux/SeriesSlice.js";
 import { useDispatch } from "react-redux";
 import $ from "jquery";
+import ToolTipComponent from "../ToolTip/ToolTip.jsx";
 export default function Footer() {
   let disp = useDispatch();
   let [moviesFooter, setMoviesFooter] = useState(false);
@@ -59,6 +60,7 @@ export default function Footer() {
             high quality.
           </p>
         </div>
+
         <div className="space-y-2">
           <h3 className="text-2xl text-main font-bold">Quick Links</h3>
           <h5 className="font-semibold text-lg cursor-pointer hover:text-main">
@@ -167,12 +169,28 @@ export default function Footer() {
             </Link>
           </div>
         </div>
+
         <div className="space-y-2">
           <h3 className="text-2xl text-main font-bold">Follow Us</h3>
-          <div className="flex space-x-3 p-1">
-            <i className="fa-brands fa-facebook text-xl hover:text-blue-700 cursor-pointer"></i>
-            <i className="fa-brands fa-instagram text-xl hover:text-red-500 cursor-pointer"></i>
-            <i className="fa-brands fa-github text-xl hover:text-blue-600 cursor-pointer"></i>
+          <div className="flex gap-3 p-1">
+            <ToolTipComponent
+              btn={
+                <i className="fa-brands fa-facebook text-2xl hover:text-blue-700 cursor-pointer"></i>
+              }
+              content="Facebook"
+            />
+            <ToolTipComponent
+              btn={
+                <i className="fa-brands fa-instagram text-2xl hover:text-red-500 cursor-pointer"></i>
+              }
+              content="Instagram"
+            />
+            <ToolTipComponent
+              btn={
+                <i className="fa-brands fa-github text-2xl hover:text-blue-600 cursor-pointer"></i>
+              }
+              content="Github"
+            />
           </div>
         </div>
       </div>

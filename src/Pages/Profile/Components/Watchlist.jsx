@@ -28,7 +28,7 @@ export default function Watchlist() {
         {/* head */}
         <div className="flex gap-2 items-center cursor-pointer group">
           <span className="bg-main w-[5px] h-8 rounded-lg"></span>
-          <div className="flex gap-1 items-center">
+          <div onClick={()=>{navigate("/watchList")}} className="flex gap-1 items-center">
             <h2 className="text-xl md:text-3xl font-medium">Watchlist</h2>
             <span className="text-gray-600 dark:text-gray-500 ms-3 text-lg">
               {watchList?.length}

@@ -68,7 +68,7 @@ export default function NavSlider({
             }}
             className={clsx(
               "cursor-pointer",
-              movieDropDown ? "text-main" : "hover:text-main"
+              movieDropDown ? "text-main" : "hover:text-main",
             )}
           >
             Movies<i className="fa-solid fa-angle-down text-sm"></i>
@@ -82,7 +82,11 @@ export default function NavSlider({
                       <NavLink
                         onClick={closeSlider}
                         key={ele.apiName}
-                        to={`/movies/${ele.apiName}`}
+                        to={
+                          ele.apiName === "all_movies"
+                            ? `${ele.apiName}`
+                            : `/movies/${ele.apiName}`
+                        }
                         className={({ isActive }) =>
                           isActive
                             ? "text-main hover:text-red-600 "
@@ -111,10 +115,10 @@ export default function NavSlider({
             }}
             className={clsx(
               "cursor-pointer",
-              tvDropDown ? "text-main" : "hover:text-main"
+              tvDropDown ? "text-main" : "hover:text-main",
             )}
           >
-            TvShows<i className="fa-solid fa-angle-down text-sm"></i>{" "}
+            Tv Shows<i className="fa-solid fa-angle-down text-sm"></i>{" "}
           </p>
           {tvDropDown ? (
             <>
@@ -125,7 +129,11 @@ export default function NavSlider({
                       <NavLink
                         onClick={closeSlider}
                         key={ele.apiName}
-                        to={`/tv-shows/${ele.apiName}`}
+                        to={
+                          ele.apiName === "all_tv"
+                            ? `${ele.apiName}`
+                            : `/tv-shows/${ele.apiName}`
+                        }
                         className={({ isActive }) =>
                           isActive
                             ? "text-main hover:text-red-600 "

@@ -22,6 +22,8 @@ import Ratings from "./Pages/Ratings/Ratings.jsx";
 import Profile from "./Pages/Profile/Profile.jsx";
 import GuardRouting from "./Components/GuardRouting/GuardRouting.jsx";
 import TvShowTrailer from "./Pages/TvShowTrailer/TvShowTrailer.jsx";
+import MoviesGenres from "./Pages/MoviesGenres/MoviesGenres.jsx";
+import TvShowGenres from "./Pages/TvShowGenres/TvShowGenres.jsx";
 export default function App() {
   let routes = createBrowserRouter([
     {
@@ -30,6 +32,8 @@ export default function App() {
       children: [
         { path: "", element: <Home /> },
         { path: "movies/:type", element: <Movies /> },
+        { path: "all_movies", element: <MoviesGenres /> },
+        { path: "all_tv", element: <TvShowGenres /> },
         { path: "movie/:id", element: <MovieDetails /> },
         { path: "movie/:id/trailer", element: <MovieTrailer /> },
         { path: "tv-shows/:type", element: <TvShows /> },

@@ -25,6 +25,7 @@ This project is designed as a **production-level application**, inspired by plat
 - formik
 - yup
 - FontAwesome
+- lucide-react
 - clsx
 - react-helmet
 

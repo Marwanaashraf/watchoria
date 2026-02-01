@@ -6,6 +6,7 @@ import SearchByName from "../../../Components/SearchByName/SearchByName.jsx";
 import clsx from "clsx";
 import Account from "../../../Components/Account/Account.jsx";
 import { movieLinks, showsLinks } from "../../../Constants/index.js";
+
 export default function Navbar() {
   const navigate = useNavigate();
   const barsRef = useRef(undefined);
@@ -45,6 +46,7 @@ export default function Navbar() {
   }, []);
   return (
     <>
+      {/* navbar */}
       <nav className="bg-slate-200 dark:bg-slate-900 p-4 text-black dark:text-white fixed top-0 left-0 right-0 z-30 shadow-lg">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           {/* logo, links */}
@@ -84,7 +86,11 @@ export default function Navbar() {
                       return (
                         <div key={ele.apiName}>
                           <NavLink
-                            to={`/movies/${ele.apiName}`}
+                            to={
+                              ele.apiName === "all_movies"
+                                ? `${ele.apiName}`
+                                : `/movies/${ele.apiName}`
+                            }
                             className={({ isActive }) =>
                               isActive
                                 ? "text-main bg-slate-200 dark:bg-slate-700 block p-1 rounded-md"
@@ -108,7 +114,7 @@ export default function Navbar() {
               {/* shows */}
               <div className="relative group/tv">
                 <p className="hover:text-red-600 ">
-                  TvShows<i className="fa-solid fa-angle-down text-sm"></i>{" "}
+                  Tv Shows<i className="fa-solid fa-angle-down text-sm"></i>{" "}
                 </p>
                 <div className="hidden group-hover/tv:block">
                   <div className="absolute top-7 left-0 bg-slate-50 dark:bg-slate-800 shadow-lg rounded-lg flex-col p-1 space-y-2 w-32 ">
@@ -116,7 +122,11 @@ export default function Navbar() {
                       return (
                         <div key={ele.apiName}>
                           <NavLink
-                            to={`/tv-shows/${ele.apiName}`}
+                            to={
+                              ele.apiName === "all_tv"
+                                ? `${ele.apiName}`
+                                : `/tv-shows/${ele.apiName}`
+                            }
                             className={({ isActive }) =>
                               isActive
                                 ? "text-main bg-slate-200 dark:bg-slate-700 block p-1 rounded-md"
@@ -153,16 +163,16 @@ export default function Navbar() {
             <div
               onClick={changeMode}
               className={clsx(
-                "flex items-center rounded-full w-12 h-7 bg-slate-300  dark:bg-slate-700 border border-slate-400 dark:border-slate-500 hover:border-main hover:dark:border-main duration-300 cursor-pointer",
-                darkMode ? "justify-end" : "justify-start"
+                "flex items-center rounded-full w-12 h-6 bg-slate-300  dark:bg-slate-700 border border-slate-400 dark:border-slate-500 hover:border-main hover:dark:border-main duration-300 cursor-pointer",
+                darkMode ? "justify-end" : "justify-start",
               )}
             >
               {darkMode ? (
-                <div className="w-6 h-6 bg-slate-950 rounded-full flex justify-center items-center shadow ">
+                <div className="w-5 h-5 bg-slate-950 rounded-full flex justify-center items-center shadow ">
                   <i className="fa-regular fa-moon text-sm"></i>
                 </div>
               ) : (
-                <div className="w-6 h-6 bg-white flex justify-center items-center rounded-full">
+                <div className="w-5 h-5 bg-white flex justify-center items-center rounded-full">
                   <i className="fa-solid fa-lightbulb text-yellow-400 text-sm"></i>
                 </div>
               )}
@@ -179,7 +189,7 @@ export default function Navbar() {
               }}
               className={clsx(
                 "cursor-pointer text-2xl",
-                searchToggle ? "text-main" : "hover:text-main"
+                searchToggle ? "text-main" : "hover:text-main",
               )}
             >
               <i className="fa-solid fa-magnifying-glass"></i>
@@ -204,6 +214,8 @@ export default function Navbar() {
           ""
         )}
       </nav>
+
+      {/* slider */}
       {slider ? (
         <NavSlider
           closeSlider={closeSlider}
